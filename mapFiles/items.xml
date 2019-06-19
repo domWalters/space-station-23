@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<items>
+    <item id="4321">
+        <name>Plastic Sheet</name>
+        <stackCapacity>40</stackCapacity>
+    </item>
+    <item id="7665">
+        <name>Steel Girder (Medium)</name>
+        <stackCapacity>15</stackCapacity>
+    </item>
+    <item id="1234">
+        <name>Wooden Plank</name>
+        <stackCapacity>20</stackCapacity>
+    </item>
+    <item id="4322">
+        <name>Uranium Rod</name>
+        <stackCapacity>75</stackCapacity>
+    </item>
+    <item id="7128">
+        <name>Desk</name>
+        <stackCapacity>2</stackCapacity>
+    </item>
+    <item id="1864">
+        <name>Gold Rod</name>
+        <stackCapacity>75</stackCapacity>
+    </item>
+    <item id="7628">
+        <name>Steel Pole</name>
+        <stackCapacity>25</stackCapacity>
+    </item>
+    <item id="5646">
+        <name>Desk Chair</name>
+        <stackCapacity>4</stackCapacity>
+    </item>
+    <item id="9599">
+        <name>Steel Girder (Large)</name>
+        <stackCapacity>10</stackCapacity>
+    </item>
+</items>
