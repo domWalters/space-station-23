@@ -1,6 +1,6 @@
 package org.spacestation23.item;
 
-import org.spacestation23.gui.itemManager.alert.ItemCreationFailedAlert;
+import org.spacestation23.itemManager.alert.ItemCreationFailedAlert;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 

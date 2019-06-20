@@ -1,4 +1,4 @@
-package org.spacestation23.gui.itemManager;
+package org.spacestation23.itemManager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.spacestation23.gui.itemManager.alert.ItemCreationSucceededAlert;
+import org.spacestation23.itemManager.alert.ItemCreationSucceededAlert;
 import org.spacestation23.item.Item;
 import org.spacestation23.item.ItemCreator;
 

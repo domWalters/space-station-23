@@ -1,4 +1,4 @@
-package org.spacestation23.gui;
+package org.spacestation23.map;
 
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;

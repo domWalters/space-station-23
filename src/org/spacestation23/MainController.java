@@ -7,12 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import org.spacestation23.character.Pawn;
-import org.spacestation23.gui.Map;
-import org.spacestation23.gui.itemManager.ItemManagerStage;
-import org.spacestation23.gui.LoggerStore;
+import org.spacestation23.itemManager.ItemManagerStage;
 import org.spacestation23.item.ItemCreator;
 import org.spacestation23.map.Grid;
 import org.spacestation23.map.GridLoader;
+import org.spacestation23.map.Map;
 import org.spacestation23.map.Tile;
 import org.spacestation23.map.exceptions.FailedMovementException;
 

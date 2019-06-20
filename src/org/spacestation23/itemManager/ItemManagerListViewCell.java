@@ -1,4 +1,4 @@
-package org.spacestation23.gui.itemManager;
+package org.spacestation23.itemManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

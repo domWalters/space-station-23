@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Label?>
+
+<Group fx:id="group" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"> <!--fx:controller="org.spacestation23.MainController"> -->
+    <children>
+        <Region fx:id="region" styleClass="regionBorderUnselected"/>
+        <Label fx:id="label" alignment="CENTER" translateX="20" translateY="16"/>
+    </children>
+</Group>

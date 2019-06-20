@@ -1,4 +1,4 @@
-package org.spacestation23.gui;
+package org.spacestation23;
 
 import javafx.scene.control.TextArea;
 

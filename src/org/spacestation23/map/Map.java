@@ -1,13 +1,8 @@
-package org.spacestation23.gui;
+package org.spacestation23.map;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import org.spacestation23.character.Pawn;
-import org.spacestation23.map.Grid;
-import org.spacestation23.map.GridNode;
-import org.spacestation23.map.GridRow;
-import org.spacestation23.map.Tile;
 
 public class Map extends GridPane {
 

@@ -1,4 +1,4 @@
-package org.spacestation23.gui.itemManager.alert;
+package org.spacestation23.itemManager.alert;
 
 import javafx.scene.control.Alert;
 
