@@ -20,6 +20,7 @@ import org.spacestation23.model.grid.GridRow;
 import org.spacestation23.model.grid.exceptions.FailedMovementException;
 import org.spacestation23.model.item.ItemCreator;
 import org.spacestation23.view.itemManager.ItemManagerApplication;
+import org.spacestation23.view.main.MapCell;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -78,54 +79,48 @@ public class MainController implements Initializable, PropertyChangeListener {
             GridRow row = grid.get(y);
             for (int x = 0; x < grid.xSize(y); x++) {
                 GridNode cell = row.get(x);
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main/Tile.fxml"));
-                    Group group = loader.load();
-                    group.setOnMouseClicked(e ->  {
-                        if (e.getButton() == MouseButton.PRIMARY) {
-                            group.requestFocus();
-                        }
-                    });
-                    group.setOnKeyPressed(event -> {
-                        Pawn clickedPawn = cell.getPawn();
-                        if (clickedPawn != null) {
-                            try {
-                                switch(event.getCode()) {
-                                    case W:
-                                        clickedPawn.moveUp(); break;
-                                    case D:
-                                        clickedPawn.moveRight(); break;
-                                    case S:
-                                        clickedPawn.moveDown(); break;
-                                    case A:
-                                        clickedPawn.moveLeft(); break;
-                                }
-                            } catch (FailedMovementException e) {
-                                loggerStore.scroll("FAILED MOVEMENT FROM " + e.getPawn().getLocation() + " IN DIRECTION " + e.getDirection() + ".");
-                            }
-                        } else {
-                            System.out.println("NO PAWN IN FOCUS TILE");
-                        }
-                    });
-                    group.focusedProperty().addListener((ov, oldV, newV) -> {
-                        if (newV) {
-                            group.getChildren().get(0).setStyle("-fx-border-color: blue;");
-                        } else {
-                            group.getChildren().get(0).setStyle("-fx-border-color: black; ");
-                        }
-                    });
-                    //
-                    Label cellTileLabel = (Label)group.getChildren().get(1);
-                    Pawn cellPawn = cell.getPawn();
-                    if (cellPawn != null) {
-                        cellTileLabel.setText(cellPawn.getSprite());
-                    } else {
-                        cellTileLabel.setText(cell.getSprite());
+                MapCell mapCell = new MapCell();
+                mapCell.setOnMouseClicked(e ->  {
+                    if (e.getButton() == MouseButton.PRIMARY) {
+                        mapCell.requestFocus();
                     }
-                    mapGridPane.add(group, x, y);
-                } catch (IOException e) {
-
+                });
+                mapCell.setOnKeyPressed(event -> {
+                    Pawn clickedPawn = cell.getPawn();
+                    if (clickedPawn != null) {
+                        try {
+                            switch(event.getCode()) {
+                                case W:
+                                    clickedPawn.moveUp(); break;
+                                case D:
+                                    clickedPawn.moveRight(); break;
+                                case S:
+                                    clickedPawn.moveDown(); break;
+                                case A:
+                                    clickedPawn.moveLeft(); break;
+                            }
+                        } catch (FailedMovementException e) {
+                            loggerStore.scroll("FAILED MOVEMENT FROM " + e.getPawn().getLocation() + " IN DIRECTION " + e.getDirection() + ".");
+                        }
+                    } else {
+                        System.out.println("NO PAWN IN FOCUS TILE");
+                    }
+                });
+                mapCell.focusedProperty().addListener((ov, oldV, newV) -> {
+                    if (newV) {
+                        mapCell.setRegionStyle("-fx-border-color: blue;");
+                    } else {
+                        mapCell.setRegionStyle("-fx-border-color: black; ");
+                    }
+                });
+                //
+                Pawn cellPawn = cell.getPawn();
+                if (cellPawn != null) {
+                    mapCell.setText(cellPawn.getSprite());
+                } else {
+                    mapCell.setText(cell.getSprite());
                 }
+                mapGridPane.add(mapCell, x, y);
             }
         }
     }
@@ -145,15 +140,15 @@ public class MainController implements Initializable, PropertyChangeListener {
             GridNode newLocation = (GridNode) newLocationPair.getKey();
             String pawnSprite = (String) newLocationPair.getValue();
             for (Node node : mapGridPane.getChildren()) {
-                Group group = (Group) node;
+                MapCell mapCell = (MapCell) node;
                 int row = GridPane.getRowIndex(node);
                 int col = GridPane.getColumnIndex(node);
                 if (oldLocation.getX() == col && oldLocation.getY() == row) {
-                    ((Label) group.getChildren().get(1)).setText(oldLocation.getSprite());
+                    mapCell.setText(oldLocation.getSprite());
                 }
                 if (newLocation.getX() == col && newLocation.getY() == row) {
-                    ((Label) group.getChildren().get(1)).setText(pawnSprite);
-                    group.requestFocus();
+                    mapCell.setText(pawnSprite);
+                    mapCell.requestFocus();
                 }
             }
         }

@@ -5,7 +5,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.Region?>
 <?import java.net.URL?>
-<Group fx:id="group" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="javafx.scene.Group" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Region fx:id="region" styleClass="region-border-unselected"/>
         <Label fx:id="label" alignment="CENTER" translateX="20" translateY="16" />
@@ -13,4 +13,4 @@
     <stylesheets>
         <URL value="@../../css/main/Tile.css" />
     </stylesheets>
-</Group>
+</fx:root>
