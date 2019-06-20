@@ -2,13 +2,10 @@ package org.spacestation23.control;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import org.spacestation23.model.LoggerStore;
@@ -24,32 +21,16 @@ import org.spacestation23.view.main.MapCell;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable, PropertyChangeListener {
 
     @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private MenuBar menuBar;
-
-    @FXML
     private TextArea logger;
 
     @FXML
     private GridPane mapGridPane;
-
-    @FXML
-    private MenuItem itemManager;
-
-    @FXML
-    private Menu utilitiesMenu;
-
-    @FXML
-    private Menu fileMenu;
 
     private Grid grid;
     private Pawn pawn1;
