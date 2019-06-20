@@ -12,7 +12,7 @@ public class ItemManagerApplication extends Stage {
     public ItemManagerApplication() {
         super();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/ItemManager.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/itemManager/ItemManager.fxml"));
             Scene scene = new Scene(root);
             this.setScene(scene);
             this.setTitle("Space-Station-23: Item Manager");

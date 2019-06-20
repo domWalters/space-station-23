@@ -1,9 +1,13 @@
 package org.spacestation23.model.character;
 
-import org.spacestation23.model.item.Inventory;
-import org.spacestation23.model.item.ItemStack;
+import javafx.util.Pair;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.grid.exceptions.FailedMovementException;
+import org.spacestation23.model.item.Inventory;
+import org.spacestation23.model.item.ItemStack;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 import static org.spacestation23.model.item.Inventory.CHARACTER_DEFAULT_INVENTORY_STACK_CAPACITY;
 
@@ -15,6 +19,8 @@ public class Pawn {
 
     private GridNode location;
     private String sprite;
+
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public Pawn(String name, GridNode location, String sprite) {
         this.setName(name);
@@ -54,7 +60,9 @@ public class Pawn {
     }
 
     public void setLocation(GridNode location) {
+        GridNode oldLocation = this.location;
         this.location = location;
+        this.pcs.firePropertyChange("pawnLocation", oldLocation, new Pair<>(location, this.sprite));
     }
 
     public String getSprite() {
@@ -63,6 +71,14 @@ public class Pawn {
 
     public void setSprite(String sprite) {
         this.sprite = sprite;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.removePropertyChangeListener(listener);
     }
 
     public void move(boolean predicate, int dy, int dx, String direction) throws FailedMovementException {

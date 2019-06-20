@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import java.net.URL?>
-
 <?scenebuilder-stylesheet Tile.css?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.Region?>
+<?import java.net.URL?>
 <Group fx:id="group" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Region fx:id="region" styleClass="region-border-unselected"/>
         <Label fx:id="label" alignment="CENTER" translateX="20" translateY="16" />
     </children>
     <stylesheets>
-        <URL value="@../css/Tile.css" />
+        <URL value="@../../css/main/Tile.css" />
     </stylesheets>
 </Group>

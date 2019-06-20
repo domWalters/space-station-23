@@ -17,9 +17,9 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/main/Main.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("css/Tile.css");
+            scene.getStylesheets().add("css/main/Tile.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("Space-Station-23");
             primaryStage.show();

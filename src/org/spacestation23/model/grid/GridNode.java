@@ -4,9 +4,6 @@ import javafx.util.Pair;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.item.Inventory;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
 public class GridNode {
 
     private Integer x;
@@ -17,8 +14,6 @@ public class GridNode {
     private String sprite;
     private Inventory inventory;
     private Pawn pawn;
-
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public GridNode(Integer x, Integer y, Grid grid, Pair<Boolean, Integer> passableAndCapacity, String sprite) {
         super();
@@ -88,17 +83,7 @@ public class GridNode {
     }
 
     public void setPawn(Pawn pawn) {
-        Pawn oldPawn = this.getPawn();
         this.pawn = pawn;
-        this.pcs.firePropertyChange("pawn", oldPawn, this.getPawn());
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.removePropertyChangeListener(listener);
     }
 
     @Override
