@@ -1,7 +1,6 @@
 package org.spacestation23.item;
 
 import org.spacestation23.gui.itemManager.alert.ItemCreationFailedAlert;
-import org.spacestation23.gui.itemManager.ItemManagerGridPane;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -82,9 +81,9 @@ public class ItemCreator {
         }
     }
 
-    public static Item createItemFromGridPane(ItemManagerGridPane gridPane) {
+    public static Item createItemFromStrings(String itemName, String itemId, String itemStackCapacity) {
         ItemCreationFailedAlert alert = new ItemCreationFailedAlert();
-        Item newItem = new Item(gridPane);
+        Item newItem = new Item(itemName, itemId, itemStackCapacity);
         if (!newItem.getName().equals(Item.INVALID_NAME)) {
             if (newItem.getItemId() != Item.INVALID_ITEM_ID) {
                 if (newItem.getStackCapacity() != Item.INVALID_STACK_CAPACITY) {

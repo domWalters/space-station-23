@@ -7,20 +7,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.gui.itemManager.ItemManagerController">
+<BorderPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.gui.itemManager.ItemManagerController">
     <top>
         <MenuBar fx:id="menuBar">
            <menus>
                <Menu fx:id="fileMenu" text="File">
                   <items>
-                      <MenuItem fx:id="newItem" text="Create Item..." />
-                      <MenuItem fx:id="open" text="Open..." />
-                      <MenuItem fx:id="save" text="Save..." />
+                      <MenuItem fx:id="open" text="Open..." onAction="#handleOpenItemsXML"/>
+                      <MenuItem fx:id="save" text="Save..." onAction="#handleSaveItemsXML"/>
                   </items>
                </Menu>
                <Menu fx:id="editMenu" text="Edit">
                   <items>
-                      <MenuItem fx:id="delete" text="Delete Item" />
+                      <MenuItem fx:id="delete" text="Delete Item" onAction="#handleDeleteItem"/>
                   </items>
                </Menu>
            </menus>
