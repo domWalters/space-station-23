@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.MainController">
+<BorderPane fx:id="borderPane" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MainController">
     <top>
         <MenuBar fx:id="menuBar">
             <Menu fx:id="fileMenu" text="File"/>
@@ -17,7 +17,7 @@
     <right>
         <BorderPane>
             <bottom>
-                <TextArea fx:id="logger"/>
+                <TextArea fx:id="logger" editable="false" focusTraversable="false"/>
             </bottom>
         </BorderPane>
     </right>

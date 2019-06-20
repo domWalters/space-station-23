@@ -1,0 +1,103 @@
+package org.spacestation23.model.character;
+
+import org.spacestation23.model.item.Inventory;
+import org.spacestation23.model.item.ItemStack;
+import org.spacestation23.model.grid.GridNode;
+import org.spacestation23.model.grid.exceptions.FailedMovementException;
+
+import static org.spacestation23.model.item.Inventory.CHARACTER_DEFAULT_INVENTORY_STACK_CAPACITY;
+
+public class Pawn {
+
+    private String name;
+    private Inventory inventory;
+    private ItemStack equippedItem;
+
+    private GridNode location;
+    private String sprite;
+
+    public Pawn(String name, GridNode location, String sprite) {
+        this.setName(name);
+        this.setInventory(new Inventory("Personal Inventory of " + this.getName(), CHARACTER_DEFAULT_INVENTORY_STACK_CAPACITY));
+        equippedItem = null;
+        this.setLocation(location);
+        this.setSprite(sprite);
+        location.setPawn(this);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public ItemStack getEquippedItem() {
+        return equippedItem;
+    }
+
+    public void setEquippedItem(ItemStack equippedItem) {
+        this.equippedItem = equippedItem;
+    }
+
+    public GridNode getLocation() {
+        return location;
+    }
+
+    public void setLocation(GridNode location) {
+        this.location = location;
+    }
+
+    public String getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(String sprite) {
+        this.sprite = sprite;
+    }
+
+    public void move(boolean predicate, int dy, int dx, String direction) throws FailedMovementException {
+        GridNode location = this.getLocation();
+        if (predicate) {
+            GridNode newLocation = location.getGrid().get(location.getY() + dy).get(location.getX() + dx);
+            if (newLocation.isPassable()) {
+                location.setPawn(null);
+                this.setLocation(newLocation);
+                newLocation.setPawn(this);
+            } else {
+                throw new FailedMovementException(this, direction);
+            }
+        } else {
+            throw new FailedMovementException(this, direction);
+        }
+
+    }
+
+    public void moveUp() throws FailedMovementException {
+        this.move(this.getLocation().getY() > 0, -1, 0, "U");
+    }
+
+    public void moveRight() throws FailedMovementException {
+        GridNode location = this.getLocation();
+        this.move(location.getX() < location.getGrid().xSize(location.getY()) - 1, 0, 1, "R");
+    }
+
+    public void moveDown() throws FailedMovementException {
+        GridNode location = this.getLocation();
+        this.move(location.getY() < location.getGrid().ySize() - 1, 1, 0, "D");
+    }
+
+    public void moveLeft() throws FailedMovementException {
+        this.move(this.getLocation().getX() > 0, 0, -1, "L");
+    }
+
+}
