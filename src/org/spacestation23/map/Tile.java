@@ -25,15 +25,23 @@ public class Tile extends Group {
         this.setSprite(sprite);
         this.setLocation(location);
 
-        Region rect = new Region();
-        rect.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: black; -fx-min-width: 50; -fx-min-height:50; -fx-max-width:50; -fx-max-height: 50;");
-        this.setRegion(rect);
+        Region region = new Region();
+        region.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: black; -fx-min-width: 50; -fx-min-height:50; -fx-max-width:50; -fx-max-height: 50;");
+        this.setRegion(region);
         Label label = new Label(sprite);
         label.setAlignment(Pos.CENTER);
         label.setTranslateX(20);
         label.setTranslateY(16);
         this.setLabel(label);
         this.getChildren().addAll(region, label);
+
+        this.focusedProperty().addListener((ov, oldV, newV) -> {
+            if (newV) {
+                region.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: blue; -fx-min-width: 50; -fx-min-height:50; -fx-max-width:50; -fx-max-height: 50;");
+            } else {
+                region.setStyle("-fx-border-style: solid; -fx-border-width: 1; -fx-border-color: black; -fx-min-width: 50; -fx-min-height:50; -fx-max-width:50; -fx-max-height: 50;");
+            }
+        });
     }
 
     public String getSprite() {

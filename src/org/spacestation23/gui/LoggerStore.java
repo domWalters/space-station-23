@@ -1,21 +1,16 @@
 package org.spacestation23.gui;
 
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
-public class LoggerArea extends TextArea {
+public class LoggerStore {
 
     private String lineOne;
     private String lineTwo;
     private String lineThree;
 
-    public LoggerArea() {
-        super();
-        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
-        this.setBorder(border);
-        this.setEditable(false);
-        this.setPrefRowCount(3);
+    private TextArea logger;
+
+    public LoggerStore(TextArea logger) {
         this.setLineOne("");
         this.setLineTwo("");
         this.setLineThree("");
@@ -45,11 +40,19 @@ public class LoggerArea extends TextArea {
         this.lineThree = lineThree;
     }
 
+    public TextArea getLogger() {
+        return logger;
+    }
+
+    public void setLogger(TextArea logger) {
+        this.logger = logger;
+    }
+
     public void scroll(String newLog) {
         this.setLineThree(this.getLineTwo());
         this.setLineTwo(this.getLineOne());
         this.setLineOne(newLog);
-        this.setText(this.getLineOne() + "\n" + this.getLineTwo() + "\n" + this.getLineThree());
+        this.getLogger().setText(this.getLineOne() + "\n" + this.getLineTwo() + "\n" + this.getLineThree());
     }
 
 }
