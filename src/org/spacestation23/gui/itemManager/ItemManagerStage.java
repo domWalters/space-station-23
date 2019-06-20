@@ -20,16 +20,16 @@ public class ItemManagerStage extends Stage {
         this.setTitle("Space-Station-23: Item Manager");
         ItemManagerMenuBar menuBar = new ItemManagerMenuBar(this);
         root.setTop(menuBar);
-        ItemInfoGridPane gridPane = createFocusGridPane();
+        ItemManagerGridPane gridPane = createFocusGridPane();
         root.setRight(gridPane);
-        ListView<Item> itemListView = this.createListView(gridPane);
+        ItemManagerListView itemListView = new ItemManagerListView(gridPane);
         gridPane.setItemListView(itemListView);
         menuBar.setItemListView(itemListView);
         root.setLeft(itemListView);
     }
 
-    private ItemInfoGridPane createFocusGridPane() {
-        ItemInfoGridPane gridPane = new ItemInfoGridPane();
+    private ItemManagerGridPane createFocusGridPane() {
+        ItemManagerGridPane gridPane = new ItemManagerGridPane();
         Button buttonSubmit = new Button("Submit");
         buttonSubmit.setOnAction(e -> {
             Item newItem = ItemCreator.createItemFromGridPane(gridPane);
@@ -43,21 +43,6 @@ public class ItemManagerStage extends Stage {
         });
         gridPane.add(buttonSubmit, 3, 4);
         return gridPane;
-    }
-
-    private ListView<Item> createListView(ItemInfoGridPane gridPane) {
-        ListView<Item> listView = new ListView<>();
-        ObservableList<Item> items = FXCollections.observableArrayList(ItemCreator.items.values());
-        listView.setItems(items);
-        listView.setCellFactory(itemListView -> new ItemListViewCell());
-        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                gridPane.getNameTextField().setText(newValue.getName());
-                gridPane.getIdTextField().setText("" + newValue.getItemId());
-                gridPane.getStackCapacityTextField().setText("" + newValue.getStackCapacity());
-            }
-        });
-        return listView;
     }
 
 }

@@ -8,7 +8,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.GridPane;
 import org.spacestation23.item.Item;
 
-public class ItemListViewCell extends ListCell<Item> {
+public class ItemManagerListViewCell extends ListCell<Item> {
 
     @Override
     protected void updateItem(Item item, boolean empty) {

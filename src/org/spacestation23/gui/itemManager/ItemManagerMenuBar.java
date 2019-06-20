@@ -65,7 +65,7 @@ public class ItemManagerMenuBar extends MenuBar {
         dialog.setTitle("Item Creator");
         dialog.setHeaderText("Fill in the required fields, and submit to create a new item.");
         dialog.setResizable(true);
-        ItemInfoGridPane gridPane = new ItemInfoGridPane();
+        ItemManagerGridPane gridPane = new ItemManagerGridPane();
         dialog.getDialogPane().setContent(gridPane);
 
         ButtonType buttonSubmit = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);

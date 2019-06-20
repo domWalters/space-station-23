@@ -1,6 +1,6 @@
 package org.spacestation23.item;
 
-import org.spacestation23.gui.itemManager.ItemInfoGridPane;
+import org.spacestation23.gui.itemManager.ItemManagerGridPane;
 
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ public class Item {
         this.setStackCapacity(stackCapacity);
     }
 
-    public Item(ItemInfoGridPane gridPane) {
+    public Item(ItemManagerGridPane gridPane) {
         String itemName = gridPane.getNameTextField().getText();
         String itemId = gridPane.getIdTextField().getText();
         String itemStackCapacity = gridPane.getStackCapacityTextField().getText();

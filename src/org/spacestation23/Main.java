@@ -32,6 +32,7 @@ public class Main extends Application {
         Grid grid = GridLoader.loadFromFile("mapFiles/exampleGrid1.txt");
         Pawn pawn = new Pawn("Dom", grid.get(3 - 1).get(3 - 1), new Tile("D", grid.get(3 - 1).get(3 - 1)));
         Pawn pawn2 = new Pawn("David", grid.get(6 - 1).get(6 - 1), new Tile("d", grid.get(6 - 1).get(6 - 1)));
+        ItemCreator.populateItemsFromFile("mapFiles/items.xml");
         root.setCenter(new Map(grid, scene));
         // Create MenuBar
         TopMenuBar menuBar = new TopMenuBar();
@@ -74,10 +75,6 @@ public class Main extends Application {
             }
         });
         root.requestFocus();
-
-        ItemCreator.populateItemsFromFile("mapFiles/items.xml");
-        System.out.println(ItemCreator.items.get(7628));
-
         primaryStage.show();
     }
 }

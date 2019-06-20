@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import org.spacestation23.item.Item;
 
-public class ItemInfoGridPane extends GridPane {
+public class ItemManagerGridPane extends GridPane {
 
     private Label nameLabel;
     private Label idLabel;
@@ -18,7 +18,7 @@ public class ItemInfoGridPane extends GridPane {
 
     private ListView<Item> itemListView;
 
-    public ItemInfoGridPane() {
+    public ItemManagerGridPane() {
         super();
 
         this.setNameLabel(new Label("Name: "));
