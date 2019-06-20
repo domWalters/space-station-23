@@ -1,14 +1,30 @@
 package org.spacestation23.gui.itemManager;
 
-import javafx.geometry.Orientation;
-import javafx.geometry.VPos;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.GridPane;
 import org.spacestation23.item.Item;
 
+import java.io.IOException;
+
 public class ItemManagerListViewCell extends ListCell<Item> {
+
+    @FXML
+    private Label idLabel;
+
+    @FXML
+    private GridPane gridPane;
+
+    @FXML
+    private Separator separator;
+
+    @FXML
+    private Label nameLabel;
+
+    private FXMLLoader mLLoader;
 
     @Override
     protected void updateItem(Item item, boolean empty) {
@@ -17,13 +33,18 @@ public class ItemManagerListViewCell extends ListCell<Item> {
             setText(null);
             setGraphic(null);
         } else {
-            GridPane gridPane = new GridPane();
-            Label idLabel = new Label("" + item.getItemId());
-            Label nameLabel = new Label(item.getName());
-            Separator separator = new Separator();
-            separator.setOrientation(Orientation.VERTICAL);
-            separator.setValignment(VPos.CENTER);
-            gridPane.addRow(1, idLabel, separator, nameLabel);
+            if (mLLoader == null) {
+                mLLoader = new FXMLLoader(getClass().getResource("/fxml/ItemListCell.fxml"));
+                mLLoader.setController(this);
+                try {
+                    mLLoader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            idLabel.setText("" + item.getItemId());
+            nameLabel.setText(item.getName());
+
             setText(null);
             setGraphic(gridPane);
         }

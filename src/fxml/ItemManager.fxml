@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.gui.itemManager.ItemManagerController">
+    <top>
+        <MenuBar fx:id="menuBar">
+           <menus>
+               <Menu fx:id="fileMenu" text="File">
+                  <items>
+                      <MenuItem fx:id="newItem" text="Create Item..." />
+                      <MenuItem fx:id="open" text="Open..." />
+                      <MenuItem fx:id="save" text="Save..." />
+                  </items>
+               </Menu>
+               <Menu fx:id="editMenu" text="Edit">
+                  <items>
+                      <MenuItem fx:id="delete" text="Delete Item" />
+                  </items>
+               </Menu>
+           </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <ListView fx:id="itemListView"/>
+    </left>
+    <right>
+        <GridPane>
+           <children>
+               <Label fx:id="nameLabel" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+               <Label fx:id="idLabel" text="ID (can omit):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+               <TextField fx:id="idTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <Label fx:id="stackCapacityLabel" text="Stack Capacity:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+               <TextField fx:id="stackCapacityTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <Button fx:id="buttonSubmit" onAction="#handleSubmitButton" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+           </children>
+        </GridPane>
+    </right>
+</BorderPane>
