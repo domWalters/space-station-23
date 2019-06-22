@@ -1,5 +1,6 @@
 package org.spacestation23.model.character;
 
+import javafx.scene.image.Image;
 import javafx.util.Pair;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.grid.exceptions.FailedMovementException;
@@ -18,11 +19,11 @@ public class Pawn {
     private ItemStack equippedItem;
 
     private GridNode location;
-    private String sprite;
+    private Image sprite;
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public Pawn(String name, GridNode location, String sprite) {
+    public Pawn(String name, GridNode location, Image sprite) {
         this.setName(name);
         this.setInventory(new Inventory("Personal Inventory of " + this.getName(), CHARACTER_DEFAULT_INVENTORY_STACK_CAPACITY));
         equippedItem = null;
@@ -65,11 +66,11 @@ public class Pawn {
         this.pcs.firePropertyChange("pawnLocation", oldLocation, new Pair<>(location, this.sprite));
     }
 
-    public String getSprite() {
+    public Image getSprite() {
         return sprite;
     }
 
-    public void setSprite(String sprite) {
+    public void setSprite(Image sprite) {
         this.sprite = sprite;
     }
 

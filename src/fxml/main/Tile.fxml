@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?scenebuilder-stylesheet Tile.css?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.image.ImageView?>
 <?import java.net.URL?>
-<fx:root type="javafx.scene.Group" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.Pane?>
+<fx:root type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Region fx:id="region" styleClass="region-border-unselected"/>
-        <Label fx:id="label" alignment="CENTER" translateX="20" translateY="16" />
+        <ImageView fx:id="tileView" fitWidth="50" fitHeight="50"/>
+        <ImageView fx:id="pawnView" fitWidth="50" fitHeight="50"/>
+        <Pane fx:id="focus" prefWidth="49" prefHeight="49" styleClass="rect-border-unselected"/>
     </children>
     <stylesheets>
-        <URL value="@../../css/main/Tile.css" />
+        <URL value="@../../css/main/Tile.css"/>
     </stylesheets>
 </fx:root>

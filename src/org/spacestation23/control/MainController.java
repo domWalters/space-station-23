@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
@@ -18,6 +19,7 @@ import org.spacestation23.model.grid.exceptions.FailedMovementException;
 import org.spacestation23.model.item.ItemCreator;
 import org.spacestation23.view.itemManager.ItemManagerApplication;
 import org.spacestation23.view.main.MapCell;
+import org.spacestation23.view.main.SpriteFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -39,8 +41,8 @@ public class MainController implements Initializable, PropertyChangeListener {
 
     public MainController() {
         grid = GridLoader.loadFromFile("mapFiles/exampleGrid1.txt");
-        pawn1 = new Pawn("Dom", grid.get(3 - 1).get(3 - 1), "D");
-        pawn2 = new Pawn("David", grid.get(6 - 1).get(6 - 1), "d");
+        pawn1 = new Pawn("Dom", grid.get(3 - 1).get(3 - 1), SpriteFactory.pawnImg);
+        pawn2 = new Pawn("David", grid.get(6 - 1).get(6 - 1), SpriteFactory.pawnImg);
         loggerStore = new LoggerStore(3);
         loggerStore.addPropertyChangeListener(this);
         pawn1.addPropertyChangeListener(this);
@@ -60,7 +62,13 @@ public class MainController implements Initializable, PropertyChangeListener {
             GridRow row = grid.get(y);
             for (int x = 0; x < grid.xSize(y); x++) {
                 GridNode cell = row.get(x);
-                MapCell mapCell = new MapCell();
+                Pawn cellPawn = cell.getPawn();
+                MapCell mapCell;
+                if (cellPawn != null) {
+                    mapCell = new MapCell(cell.getSprite(), cellPawn.getSprite());
+                } else {
+                    mapCell = new MapCell(cell.getSprite(), null);
+                }
                 mapCell.setOnMouseClicked(e ->  {
                     if (e.getButton() == MouseButton.PRIMARY) {
                         mapCell.requestFocus();
@@ -84,23 +92,16 @@ public class MainController implements Initializable, PropertyChangeListener {
                             loggerStore.scroll("FAILED MOVEMENT FROM " + e.getPawn().getLocation() + " IN DIRECTION " + e.getDirection() + ".");
                         }
                     } else {
-                        System.out.println("NO PAWN IN FOCUS TILE");
+                        loggerStore.scroll("NO PAWN IN FOCUS TILE");
                     }
                 });
                 mapCell.focusedProperty().addListener((ov, oldV, newV) -> {
                     if (newV) {
-                        mapCell.setRegionStyle("-fx-border-color: blue;");
+                        mapCell.focused();
                     } else {
-                        mapCell.setRegionStyle("-fx-border-color: black; ");
+                        mapCell.unfocused();
                     }
                 });
-                //
-                Pawn cellPawn = cell.getPawn();
-                if (cellPawn != null) {
-                    mapCell.setText(cellPawn.getSprite());
-                } else {
-                    mapCell.setText(cell.getSprite());
-                }
                 mapGridPane.add(mapCell, x, y);
             }
         }
@@ -119,16 +120,16 @@ public class MainController implements Initializable, PropertyChangeListener {
             GridNode oldLocation = (GridNode) evt.getOldValue();
             Pair newLocationPair = (Pair) evt.getNewValue();
             GridNode newLocation = (GridNode) newLocationPair.getKey();
-            String pawnSprite = (String) newLocationPair.getValue();
+            Image pawnSprite = (Image) newLocationPair.getValue();
             for (Node node : mapGridPane.getChildren()) {
                 MapCell mapCell = (MapCell) node;
                 int row = GridPane.getRowIndex(node);
                 int col = GridPane.getColumnIndex(node);
                 if (oldLocation.getX() == col && oldLocation.getY() == row) {
-                    mapCell.setText(oldLocation.getSprite());
+                    mapCell.disablePawn();
                 }
                 if (newLocation.getX() == col && newLocation.getY() == row) {
-                    mapCell.setText(pawnSprite);
+                    mapCell.enablePawn(pawnSprite);
                     mapCell.requestFocus();
                 }
             }

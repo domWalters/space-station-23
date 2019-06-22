@@ -1,23 +1,26 @@
 package org.spacestation23.view.main;
 
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-public class MapCell extends Group {
+public class MapCell extends StackPane {
 
     @FXML
-    private Region region;
+    private ImageView tileView;
 
     @FXML
-    private Label label;
+    private ImageView pawnView;
 
-    public MapCell() {
+    @FXML
+    private Pane focus;
+
+    public MapCell(Image tileImg, Image pawnImg) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main/Tile.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -26,18 +29,30 @@ public class MapCell extends Group {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        tileView.setImage(tileImg);
+        pawnView.setImage(pawnImg);
+        if (pawnImg == null) {
+            this.disablePawn();
+        }
     }
 
-    public StringProperty textProperty() {
-        return this.label.textProperty();
+    public void enablePawn(Image image) {
+        this.pawnView.setImage(image);
+        this.getChildren().add(1, pawnView);
     }
 
-    public void setText(String text) {
-        this.textProperty().set(text);
+    public void disablePawn() {
+        this.getChildren().remove(pawnView);
     }
 
-    public void setRegionStyle(String s) {
-        this.region.setStyle(s);
+    public void focused() {
+        focus.getStyleClass().remove("rect-border-unselected");
+        focus.getStyleClass().add("rect-border-selected");
+    }
+
+    public void unfocused() {
+        focus.getStyleClass().remove("rect-border-selected");
+        focus.getStyleClass().add("rect-border-unselected");
     }
 
 }

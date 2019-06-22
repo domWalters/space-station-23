@@ -1,5 +1,6 @@
 package org.spacestation23.model.grid;
 
+import javafx.scene.image.Image;
 import javafx.util.Pair;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.item.Inventory;
@@ -11,11 +12,11 @@ public class GridNode {
     private Grid grid;
 
     private Boolean passable;
-    private String sprite;
+    private Image sprite;
     private Inventory inventory;
     private Pawn pawn;
 
-    public GridNode(Integer x, Integer y, Grid grid, Pair<Boolean, Integer> passableAndCapacity, String sprite) {
+    public GridNode(Integer x, Integer y, Grid grid, Pair<Boolean, Integer> passableAndCapacity, Image sprite) {
         super();
         this.setX(x);
         this.setY(y);
@@ -62,11 +63,11 @@ public class GridNode {
         this.passable = passable;
     }
 
-    public String getSprite() {
+    public Image getSprite() {
         return sprite;
     }
 
-    public void setSprite(String sprite) {
+    public void setSprite(Image sprite) {
         this.sprite = sprite;
     }
 

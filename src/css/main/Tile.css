@@ -1,19 +1,11 @@
-.region-border-unselected {
+.rect-border-unselected {
     -fx-border-style: solid;
     -fx-border-width: 1;
-    -fx-border-color: black;
-    -fx-min-width: 50;
-    -fx-min-height: 50;
-    -fx-max-width: 50;
-    -fx-max-height: 50;
+    -fx-border-color: transparent;
 }
 
-.region-border-selected {
+.rect-border-selected {
     -fx-border-style: solid;
     -fx-border-width: 1;
     -fx-border-color: blue;
-    -fx-min-width: 50;
-    -fx-min-height: 50;
-    -fx-max-width: 50;
-    -fx-max-height: 50;
 }
