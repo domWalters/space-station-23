@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.spacestation23.control.MapEditorController">
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MapEditorController">
     <top>
         <MenuBar>
             <menus>
                 <Menu text="File">
                     <items>
-                        <MenuItem text="Open..." onAction="#handleOpenMap"/>
-                        <MenuItem text="Save..." onAction="#handleSaveMap"/>
+                        <MenuItem onAction="#handleOpenMap" text="Open..." />
+                        <MenuItem onAction="#handleSaveMap" text="Save..." />
                     </items>
                 </Menu>
                 <Menu text="Edit">
@@ -26,4 +26,13 @@
     <right>
 
     </right>
+   <right>
+      <GridPane>
+         <children>
+            <Label text="GridNode Properties" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
+            <Label text="Material" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <ComboBox fx:id="materialComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </right>
 </BorderPane>

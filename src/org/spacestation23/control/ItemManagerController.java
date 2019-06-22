@@ -2,7 +2,6 @@ package org.spacestation23.control;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -39,7 +38,7 @@ public class ItemManagerController implements Initializable {
     }
 
     @FXML
-    void handleSubmitButton(ActionEvent event) {
+    void handleSubmitButton() {
         String itemName = nameTextField.getText();
         String itemId = idTextField.getText();
         String itemStackCapacity = stackCapacityTextField.getText();
@@ -54,7 +53,7 @@ public class ItemManagerController implements Initializable {
     }
 
     @FXML
-    void handleOpenItemsXML(ActionEvent event) {
+    void handleOpenItemsXML() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
@@ -65,16 +64,16 @@ public class ItemManagerController implements Initializable {
     }
 
     @FXML
-    void handleSaveItemsXML(ActionEvent event) {
+    void handleSaveItemsXML() {
         FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(new Stage());
+        File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
             ItemCreator.populateFileWithItems(file.getPath());
         }
     }
 
     @FXML
-    void handleDeleteItem(ActionEvent event) {
+    void handleDeleteItem() {
         ItemCreator.items.remove(itemListView.getFocusModel().getFocusedItem().getItemId());
         ObservableList<Item> items = FXCollections.observableArrayList(ItemCreator.items.values());
         itemListView.setItems(items);

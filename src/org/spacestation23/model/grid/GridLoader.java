@@ -2,9 +2,7 @@ package org.spacestation23.model.grid;
 
 import org.spacestation23.model.Material;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class GridLoader {
     /*
@@ -14,9 +12,13 @@ public class GridLoader {
         Required properties: File is rectangular (every row is the same length, no row is blank)
     */
     public static Grid loadFromFile(String fileName) {
+        return loadFromFile(new File(fileName));
+    }
+
+    public static Grid loadFromFile(File file) {
         Grid grid = new Grid();
         try {
-            FileReader fr = new FileReader(fileName);
+            FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             Integer y = -1;
             while(br.ready()) {
@@ -46,6 +48,26 @@ public class GridLoader {
             return null;
         }
         return grid;
+    }
+
+    public static void saveToFile(Grid grid, File file) {
+        try {
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            StringBuilder string = new StringBuilder();
+            for (int row = 0; row < grid.ySize(); row++) {
+                GridRow gridRow = grid.get(row);
+                for (int col = 0; col < grid.xSize(row); col++) {
+                    GridNode gridNode = gridRow.get(col);
+                    string.append(gridNode.getMaterial().characterSprite);
+                }
+                string.append("\n");
+            }
+            bw.write(string.toString());
+            bw.close();
+        } catch (IOException e) {
+
+        }
     }
 
 }

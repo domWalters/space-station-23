@@ -15,9 +15,9 @@ import org.spacestation23.model.grid.GridLoader;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.item.ItemCreator;
 import org.spacestation23.view.itemManager.ItemManagerApplication;
+import org.spacestation23.view.main.SpriteFactory;
 import org.spacestation23.view.mapEditor.Map;
 import org.spacestation23.view.mapEditor.MapCell;
-import org.spacestation23.view.main.SpriteFactory;
 import org.spacestation23.view.mapEditor.MapEditorApplication;
 
 import java.beans.PropertyChangeEvent;

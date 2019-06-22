@@ -34,7 +34,7 @@ public class ItemManagerListViewCell extends ListCell<Item> {
             setGraphic(null);
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/fxml/itemManager/ItemListCell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/fxml/itemManager/ItemManagerListViewCell.fxml"));
                 mLLoader.setController(this);
                 try {
                     mLLoader.load();

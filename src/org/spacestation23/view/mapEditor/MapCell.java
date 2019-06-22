@@ -7,7 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import org.spacestation23.model.Material;
 import org.spacestation23.model.character.Pawn;
+import org.spacestation23.model.grid.GridNode;
 
 import java.io.IOException;
 
@@ -22,7 +24,19 @@ public class MapCell extends StackPane {
     @FXML
     private Pane focus;
 
-    public MapCell(Image tileImg, Pawn pawn) {
+    public MapCell() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapCell.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+        this.setFocusedEventHandlers();
+    }
+
+    public MapCell(GridNode cell) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapCell.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -32,13 +46,41 @@ public class MapCell extends StackPane {
             throw new RuntimeException(exception);
         }
         // Set Images
-        tileView.setImage(tileImg);
+        tileView.setImage(cell.getMaterial().imgSprite);
+        Pawn pawn = cell.getPawn();
         if (pawn != null) {
             pawnView.setImage(pawn.getSprite());
         } else {
             this.disablePawn();
         }
         // Set Event Handlers
+        this.setFocusedEventHandlers();
+    }
+
+    public void enablePawn(Image image) {
+        this.pawnView.setImage(image);
+        this.getChildren().add(1, pawnView);
+    }
+
+    public void disablePawn() {
+        this.getChildren().remove(pawnView);
+    }
+
+    public void setMaterial(Material material) {
+        this.tileView.setImage(material.imgSprite);
+    }
+
+    private void focused() {
+        focus.getStyleClass().remove("rect-border-unselected");
+        focus.getStyleClass().add("rect-border-selected");
+    }
+
+    private void unfocused() {
+        focus.getStyleClass().remove("rect-border-selected");
+        focus.getStyleClass().add("rect-border-unselected");
+    }
+
+    private void setFocusedEventHandlers() {
         this.setOnMouseClicked(e ->  {
             if (e.getButton() == MouseButton.PRIMARY) {
                 this.requestFocus();
@@ -51,25 +93,6 @@ public class MapCell extends StackPane {
                 this.unfocused();
             }
         });
-    }
-
-    public void enablePawn(Image image) {
-        this.pawnView.setImage(image);
-        this.getChildren().add(1, pawnView);
-    }
-
-    public void disablePawn() {
-        this.getChildren().remove(pawnView);
-    }
-
-    private void focused() {
-        focus.getStyleClass().remove("rect-border-unselected");
-        focus.getStyleClass().add("rect-border-selected");
-    }
-
-    private void unfocused() {
-        focus.getStyleClass().remove("rect-border-selected");
-        focus.getStyleClass().add("rect-border-unselected");
     }
 
 }

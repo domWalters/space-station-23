@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import org.spacestation23.view.mapEditor.MapCell?>
+<HBox fx:id="hBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <MapCell fx:id="itemGraphic"/>
+        <Separator fx:id="separator" orientation="VERTICAL"/>
+        <Label fx:id="itemLabel"/>
+    </children>
+</HBox>

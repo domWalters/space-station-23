@@ -4,7 +4,6 @@ import javafx.scene.layout.GridPane;
 import org.spacestation23.model.LoggerStore;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.grid.Grid;
-import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.grid.GridRow;
 import org.spacestation23.model.grid.exceptions.FailedMovementException;
 
@@ -24,9 +23,7 @@ public class Map extends GridPane {
             List<MapCell> mapCellRow = new ArrayList<>();
             GridRow row = grid.get(y);
             for (int x = 0; x < grid.xSize(y); x++) {
-                GridNode cell = row.get(x);
-                Pawn cellPawn = cell.getPawn();
-                MapCell mapCell = new MapCell(cell.getMaterial().imgSprite, cellPawn);
+                MapCell mapCell = new MapCell(row.get(x));
                 mapCellRow.add(mapCell);
                 this.add(mapCell, x, y);
             }
