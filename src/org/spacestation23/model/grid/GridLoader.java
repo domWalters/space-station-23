@@ -1,7 +1,5 @@
 package org.spacestation23.model.grid;
 
-import javafx.scene.image.Image;
-import javafx.util.Pair;
 import org.spacestation23.model.Material;
 
 import java.io.BufferedReader;

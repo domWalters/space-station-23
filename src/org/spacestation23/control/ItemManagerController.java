@@ -5,7 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.spacestation23.model.item.Item;
@@ -20,49 +21,16 @@ import java.util.ResourceBundle;
 public class ItemManagerController implements Initializable {
 
     @FXML
+    private TextField nameTextField;
+
+    @FXML
     private TextField idTextField;
 
     @FXML
     private TextField stackCapacityTextField;
 
     @FXML
-    private MenuItem newItem;
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private MenuItem save;
-
-    @FXML
-    private Button buttonSubmit;
-
-    @FXML
-    private MenuItem delete;
-
-    @FXML
-    private MenuBar menuBar;
-
-    @FXML
-    private Menu editMenu;
-
-    @FXML
-    private Label idLabel;
-
-    @FXML
     private ListView<Item> itemListView;
-
-    @FXML
-    private Label stackCapacityLabel;
-
-    @FXML
-    private Menu fileMenu;
-
-    @FXML
-    private MenuItem open;
-
-    @FXML
-    private Label nameLabel;
 
     private ObservableList<Item> itemsObservableList;
 

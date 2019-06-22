@@ -2,8 +2,9 @@
 
 <?scenebuilder-stylesheet Tile.css?>
 <?import javafx.scene.image.ImageView?>
-<?import java.net.URL?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
 <fx:root type="javafx.scene.layout.StackPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="tileView" fitWidth="50" fitHeight="50"/>
@@ -11,6 +12,6 @@
         <Pane fx:id="focus" prefWidth="49" prefHeight="49" styleClass="rect-border-unselected"/>
     </children>
     <stylesheets>
-        <URL value="@../../css/main/Tile.css"/>
+        <URL value="@../../css/main/MapCell.css"/>
     </stylesheets>
 </fx:root>

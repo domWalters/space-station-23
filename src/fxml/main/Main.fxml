@@ -2,27 +2,24 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<BorderPane prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MainController">
+<BorderPane fx:id="borderPane" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MainController">
     <top>
         <MenuBar>
-            <Menu text="File"/>
-            <Menu text="Utilities">
-                <items>
-                    <MenuItem text="Item Manager" onAction="#handleOpenItemManager"/>
-                </items>
-            </Menu>
+           <menus>
+               <Menu text="File" />
+               <Menu text="Utilities">
+                   <items>
+                       <MenuItem onAction="#handleOpenItemManager" text="Item Manager" />
+                       <MenuItem onAction="#handleOpenMapEditor" text="Map Editor" />
+                   </items>
+               </Menu>
+           </menus>
         </MenuBar>
     </top>
-    <center>
-        <GridPane fx:id="mapGridPane" pickOnBounds="false">
-
-        </GridPane>
-    </center>
     <right>
         <BorderPane>
             <bottom>
-                <TextArea fx:id="logger" editable="false" focusTraversable="false"/>
+                <TextArea fx:id="logger" editable="false" focusTraversable="false" prefRowCount="3" wrapText="true" />
             </bottom>
         </BorderPane>
     </right>

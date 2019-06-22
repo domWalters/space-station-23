@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.spacestation23.control.MapEditorController">
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Open..." onAction="#handleOpenMap"/>
+                        <MenuItem text="Save..." onAction="#handleSaveMap"/>
+                    </items>
+                </Menu>
+                <Menu text="Edit">
+                    <items>
+
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+
+    </left>
+    <right>
+
+    </right>
+</BorderPane>

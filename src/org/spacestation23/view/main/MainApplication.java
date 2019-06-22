@@ -19,7 +19,7 @@ public class MainApplication extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/main/Main.fxml"));
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("css/main/Tile.css");
+            scene.getStylesheets().add("css/main/MapCell.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("Space-Station-23");
             primaryStage.show();
