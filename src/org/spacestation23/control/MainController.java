@@ -65,9 +65,9 @@ public class MainController implements Initializable, PropertyChangeListener {
                 Pawn cellPawn = cell.getPawn();
                 MapCell mapCell;
                 if (cellPawn != null) {
-                    mapCell = new MapCell(cell.getSprite(), cellPawn.getSprite());
+                    mapCell = new MapCell(cell.getMaterial().imgSprite, cellPawn.getSprite());
                 } else {
-                    mapCell = new MapCell(cell.getSprite(), null);
+                    mapCell = new MapCell(cell.getMaterial().imgSprite, null);
                 }
                 mapCell.setOnMouseClicked(e ->  {
                     if (e.getButton() == MouseButton.PRIMARY) {

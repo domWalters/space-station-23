@@ -1,7 +1,6 @@
 package org.spacestation23.model.grid;
 
-import javafx.scene.image.Image;
-import javafx.util.Pair;
+import org.spacestation23.model.Material;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.item.Inventory;
 
@@ -11,23 +10,17 @@ public class GridNode {
     private Integer y;
     private Grid grid;
 
-    private Boolean passable;
-    private Image sprite;
+    private Material material;
     private Inventory inventory;
     private Pawn pawn;
 
-    public GridNode(Integer x, Integer y, Grid grid, Pair<Boolean, Integer> passableAndCapacity, Image sprite) {
+    public GridNode(Integer x, Integer y, Grid grid, Material material) {
         super();
         this.setX(x);
         this.setY(y);
         this.setGrid(grid);
-        this.setPassable(passableAndCapacity.getKey());
-        this.setSprite(sprite);
-        if (passableAndCapacity.getKey()) {
-            this.setInventory(new Inventory("Floor at (" + x + ", " + y + ")", passableAndCapacity.getValue()));
-        } else {
-            this.setInventory(null);
-        }
+        this.setMaterial(material);
+        this.setInventory((material.passable) ? new Inventory("Floor at (" + x + ", " + y + ")", material.inventoryCapacity) : null);
         this.setPawn(null);
     }
 
@@ -55,20 +48,12 @@ public class GridNode {
         this.grid = grid;
     }
 
-    public Boolean isPassable() {
-        return passable && (this.getPawn() == null);
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setPassable(Boolean passable) {
-        this.passable = passable;
-    }
-
-    public Image getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Image sprite) {
-        this.sprite = sprite;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public Inventory getInventory() {
