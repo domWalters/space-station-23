@@ -36,9 +36,7 @@ public class MapEditorController implements Initializable, PropertyChangeListene
 
     private Grid grid;
 
-    public MapEditorController() {
-        grid = GridLoader.loadFromFile("mapFiles/exampleGrid1.txt");
-    }
+    public MapEditorController() {}
 
     @FXML
     void handleOpenMap() {
@@ -47,7 +45,9 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         if (file != null) {
             grid = GridLoader.loadFromFile(file);
             map = new Map(grid, this);
+            map.addPropertyChangeListener(this);
             borderPane.setCenter(map);
+            borderPane.getScene().getWindow().sizeToScene();
         }
     }
 
@@ -79,9 +79,6 @@ public class MapEditorController implements Initializable, PropertyChangeListene
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        map = new Map(grid, this);
-        map.addPropertyChangeListener(this);
-        borderPane.setCenter(map);
         materialComboBox.getItems().addAll(MaterialCreator.materials.values());
         materialComboBox.setCellFactory(materialComboBox -> new MapEditorMaterialCell());
         materialComboBox.getSelectionModel().selectFirst();

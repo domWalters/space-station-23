@@ -74,9 +74,9 @@ public class ItemEditorController implements Initializable {
 
     @FXML
     void handleDeleteItem() {
-        ItemCreator.items.remove(itemListView.getFocusModel().getFocusedItem().getItemId());
-        ObservableList<Item> items = FXCollections.observableArrayList(ItemCreator.items.values());
-        itemListView.setItems(items);
+        Item focusedItem = itemListView.getFocusModel().getFocusedItem();
+        ItemCreator.items.remove(focusedItem.getItemId());
+        itemsObservableList.remove(focusedItem);
     }
 
     @Override

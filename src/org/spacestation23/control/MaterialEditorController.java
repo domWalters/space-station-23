@@ -69,18 +69,14 @@ public class MaterialEditorController implements Initializable {
 
     @FXML
     void handleDeleteMaterial() {
-        MaterialCreator.materials.remove(materialListView.getFocusModel().getFocusedItem().getName());
-        ObservableList<Material> materials = FXCollections.observableArrayList(MaterialCreator.materials.values());
-        materialListView.setItems(materials);
+        Material focusedMaterial = materialListView.getFocusModel().getFocusedItem();
+        MaterialCreator.materials.remove(focusedMaterial.getName());
+        materialsObservableList.remove(focusedMaterial);
     }
 
     @FXML
     void handleImageSpriteButtonClicked() {
         FileChooser fileChooser = new FileChooser();
-//        File currentFile = new File((String)imageSpriteButton.getUserData());
-//        File folder = new File(currentFile.getParent());
-//        System.out.println(folder.getPath());
-//        fileChooser.setInitialDirectory(new File(currentFile.getParent()));
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
             String path = file.getPath();
