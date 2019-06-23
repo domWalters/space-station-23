@@ -24,4 +24,34 @@
         <inventoryCapacity>25</inventoryCapacity>
         <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/out/production/SpaceStation23/resources/tileSprites/steel-door.png</imageSprite>
     </material>
+    <material name="STEELBULKHEADFLOOR2">
+        <characterSprite>-</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/src/resources/tileSprites/steel-floor2.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEADFLOOR5">
+        <characterSprite>-</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/src/resources/tileSprites/steel-floor5.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEADFLOOR6">
+        <characterSprite>-</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/src/resources/tileSprites/steel-floor6.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEADFLOOR3">
+        <characterSprite>-</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/src/resources/tileSprites/steel-floor3.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEADFLOOR4">
+        <characterSprite>-</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/src/resources/tileSprites/steel-floor4.png</imageSprite>
+    </material>
 </materials>

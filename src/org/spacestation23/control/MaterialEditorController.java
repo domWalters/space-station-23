@@ -85,7 +85,7 @@ public class MaterialEditorController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
-            String path = file.getPath();
+            String path = file.toURI().toString();
             imageSpriteButton.setUserData(path);
             String[] pathArray = path.split("/");
             imageSpriteButton.setText(pathArray[pathArray.length - 1]);

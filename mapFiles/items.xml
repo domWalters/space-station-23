@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <items>
-    <item id="4321">
-        <name>Plastic Sheet</name>
-        <stackCapacity>40</stackCapacity>
-    </item>
     <item id="7665">
         <name>Steel Girder (Medium)</name>
         <stackCapacity>15</stackCapacity>
