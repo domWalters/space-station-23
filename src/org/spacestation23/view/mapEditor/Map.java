@@ -1,12 +1,16 @@
 package org.spacestation23.view.mapEditor;
 
 import javafx.scene.layout.GridPane;
+import org.spacestation23.control.MapEditorController;
 import org.spacestation23.model.LoggerStore;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.grid.Grid;
+import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.grid.GridRow;
 import org.spacestation23.model.grid.exceptions.FailedMovementException;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +19,11 @@ public class Map extends GridPane {
     private Grid grid;
     private List<List<MapCell>> mapCellGrid;
 
-    public Map(Grid grid) {
+    private MapCell currentFocus;
+
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
+    public Map(Grid grid, MapEditorController controller) {
         super();
         this.grid = grid;
         this.mapCellGrid = new ArrayList<>();
@@ -23,12 +31,37 @@ public class Map extends GridPane {
             List<MapCell> mapCellRow = new ArrayList<>();
             GridRow row = grid.get(y);
             for (int x = 0; x < grid.xSize(y); x++) {
-                MapCell mapCell = new MapCell(row.get(x));
+                GridNode node = row.get(x);
+                node.addPropertyChangeListener(controller);
+                MapCell mapCell = new MapCell(node);
+                mapCell.focusedProperty().addListener((ov, oldV, newV) -> {
+                    if (newV) {
+                        this.setCurrentFocus(mapCell);
+                    }
+                });
                 mapCellRow.add(mapCell);
                 this.add(mapCell, x, y);
             }
             mapCellGrid.add(mapCellRow);
         }
+    }
+
+    public void setCurrentFocus(MapCell mapCell) {
+        MapCell oldFocus = this.currentFocus;
+        this.currentFocus = mapCell;
+        this.pcs.firePropertyChange("currentFocus", oldFocus, this.currentFocus);
+    }
+
+    public MapCell getCurrentFocus() {
+        return this.currentFocus;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.removePropertyChangeListener(listener);
     }
 
     public void setOnKeyPressed(LoggerStore loggerStore, int row, int col) {

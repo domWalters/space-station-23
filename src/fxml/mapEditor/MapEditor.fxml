@@ -31,7 +31,7 @@
          <children>
             <Label text="GridNode Properties" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
             <Label text="Material" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <ComboBox fx:id="materialComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="materialComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" focusTraversable="false" onAction="#handleMaterialComboBoxSelectionChanged"/>
          </children>
       </GridPane>
    </right>
