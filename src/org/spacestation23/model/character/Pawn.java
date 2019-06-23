@@ -63,7 +63,7 @@ public class Pawn {
     public void setLocation(GridNode location) {
         GridNode oldLocation = this.location;
         this.location = location;
-        this.pcs.firePropertyChange("pawnLocation", oldLocation, new Pair<>(location, this.sprite));
+        this.pcs.firePropertyChange("location", oldLocation, new Pair<>(location, this.sprite));
     }
 
     public Image getSprite() {

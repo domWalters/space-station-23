@@ -64,7 +64,7 @@ public class MainController implements Initializable, PropertyChangeListener {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        map = new Map(grid);
+        map = new Map(grid, null);
         map.setAllKeyPressed(loggerStore);
         borderPane.setLeft(map);
     }
@@ -78,7 +78,7 @@ public class MainController implements Initializable, PropertyChangeListener {
                 stringBuilder.append("\n");
             }
             logger.setText(stringBuilder.toString());
-        } else if (evt.getPropertyName().equals("pawnLocation") && map != null) {
+        } else if (evt.getPropertyName().equals("location") && map != null) {
             GridNode oldLocation = (GridNode) evt.getOldValue();
             Pair newLocationPair = (Pair) evt.getNewValue();
             GridNode newLocation = (GridNode) newLocationPair.getKey();

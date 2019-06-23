@@ -4,7 +4,12 @@ import org.spacestation23.model.Material;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.item.Inventory;
 
-public class GridNode {
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
+import java.util.Objects;
+
+public class GridNode implements Serializable {
 
     private Integer x;
     private Integer y;
@@ -14,14 +19,16 @@ public class GridNode {
     private Inventory inventory;
     private Pawn pawn;
 
+    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
     public GridNode(Integer x, Integer y, Grid grid, Material material) {
         super();
-        this.setX(x);
-        this.setY(y);
-        this.setGrid(grid);
-        this.setMaterial(material);
-        this.setInventory((material.passable) ? new Inventory("Floor at (" + x + ", " + y + ")", material.inventoryCapacity) : null);
-        this.setPawn(null);
+        this.x = x;
+        this.y = y;
+        this.grid = grid;
+        this.material = material;
+        this.inventory = (material.passable) ? new Inventory("Floor at (" + x + ", " + y + ")", material.inventoryCapacity) : null;
+        this.pawn = null;
     }
 
     public Integer getX() {
@@ -53,7 +60,9 @@ public class GridNode {
     }
 
     public void setMaterial(Material material) {
+        Material oldMaterial = this.getMaterial();
         this.material = material;
+        this.pcs.firePropertyChange("material", oldMaterial, this.material);
     }
 
     public Inventory getInventory() {
@@ -72,9 +81,34 @@ public class GridNode {
         this.pawn = pawn;
     }
 
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.pcs.removePropertyChangeListener(listener);
+    }
+
     @Override
     public String toString() {
         return "(" + this.getX() + ", " + this.getY() + ")";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GridNode)) return false;
+        GridNode gridNode = (GridNode) o;
+        return x.equals(gridNode.x) &&
+                y.equals(gridNode.y) &&
+                Objects.equals(grid, gridNode.grid) &&
+                material.equals(gridNode.material) &&
+                Objects.equals(inventory, gridNode.inventory) &&
+                Objects.equals(pawn, gridNode.pawn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, grid, material, inventory, pawn);
+    }
 }
