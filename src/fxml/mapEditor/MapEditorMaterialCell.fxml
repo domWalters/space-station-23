@@ -3,10 +3,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
-<?import org.spacestation23.view.mapEditor.MapCell?>
+<?import org.spacestation23.view.mapEditor.MapEditorMapCell?>
 <HBox fx:id="hBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <children>
-        <MapCell fx:id="itemGraphic"/>
+        <MapEditorMapCell fx:id="itemGraphic"/>
         <Separator orientation="VERTICAL"/>
         <Label fx:id="itemLabel"/>
     </children>

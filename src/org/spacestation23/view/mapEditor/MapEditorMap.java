@@ -3,7 +3,6 @@ package org.spacestation23.view.mapEditor;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import org.spacestation23.control.MapEditorController;
 import org.spacestation23.model.grid.Grid;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.grid.GridRow;
@@ -13,39 +12,39 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Map extends GridPane {
+public class MapEditorMap extends GridPane {
 
     private Grid grid;
-    private List<List<MapCell>> mapCellGrid;
+    private List<List<MapEditorMapCell>> mapCellGrid;
 
-    private MapCell currentFocus;
+    private MapEditorMapCell currentFocus;
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public Map() {
+    public MapEditorMap() {
         super();
     }
 
-    public Map(Grid grid, MapEditorController controller) {
+    public MapEditorMap(Grid grid, PropertyChangeListener controller) {
         super();
         this.grid = grid;
         this.mapCellGrid = new ArrayList<>();
         for (int y = 0; y < grid.ySize(); y++) {
-            List<MapCell> mapCellRow = new ArrayList<>();
+            List<MapEditorMapCell> mapEditorMapCellRow = new ArrayList<>();
             GridRow row = grid.get(y);
             for (int x = 0; x < grid.xSize(y); x++) {
                 GridNode node = row.get(x);
                 node.addPropertyChangeListener(controller);
-                MapCell mapCell = new MapCell(node);
-                mapCell.focusedProperty().addListener((ov, oldV, newV) -> {
+                MapEditorMapCell mapEditorMapCell = new MapEditorMapCell(node);
+                mapEditorMapCell.focusedProperty().addListener((ov, oldV, newV) -> {
                     if (newV) {
-                        this.setCurrentFocus(mapCell);
+                        this.setCurrentFocus(mapEditorMapCell);
                     }
                 });
-                mapCellRow.add(mapCell);
-                this.add(mapCell, x, y);
+                mapEditorMapCellRow.add(mapEditorMapCell);
+                this.add(mapEditorMapCell, x, y);
             }
-            mapCellGrid.add(mapCellRow);
+            mapCellGrid.add(mapEditorMapCellRow);
         }
     }
 
@@ -57,41 +56,41 @@ public class Map extends GridPane {
         this.grid = grid;
     }
 
-    public List<List<MapCell>> getMapCellGrid() {
+    public List<List<MapEditorMapCell>> getMapCellGrid() {
         return mapCellGrid;
     }
 
-    public void setMapCellGrid(List<List<MapCell>> mapCellGrid) {
+    public void setMapCellGrid(List<List<MapEditorMapCell>> mapCellGrid) {
         this.mapCellGrid = mapCellGrid;
     }
 
-    public MapCell getCurrentFocus() {
+    public MapEditorMapCell getCurrentFocus() {
         return this.currentFocus;
     }
 
-    public void setCurrentFocus(MapCell mapCell) {
-        MapCell oldFocus = this.currentFocus;
-        this.currentFocus = mapCell;
+    public void setCurrentFocus(MapEditorMapCell mapEditorMapCell) {
+        MapEditorMapCell oldFocus = this.currentFocus;
+        this.currentFocus = mapEditorMapCell;
         this.pcs.firePropertyChange("currentFocus", oldFocus, this.currentFocus);
     }
 
-    public void overwriteWithMap(Map map) {
-        this.setGrid(map.getGrid());
-        this.setMapCellGrid(map.getMapCellGrid());
-        for (int row = 0; row < map.getGrid().ySize(); row++) {
-            for (int col = 0; col < map.getGrid().xSize(row); col++) {
+    public void overwriteWithMap(MapEditorMap mapEditorMap) {
+        this.setGrid(mapEditorMap.getGrid());
+        this.setMapCellGrid(mapEditorMap.getMapCellGrid());
+        for (int row = 0; row < mapEditorMap.getGrid().ySize(); row++) {
+            for (int col = 0; col < mapEditorMap.getGrid().xSize(row); col++) {
                 this.add(this.mapCellGrid.get(row).get(col), col, row);
             }
         }
     }
 
-    public MapCell getMapCellFromGridNode(GridNode gridNode) {
+    public MapEditorMapCell getMapCellFromGridNode(GridNode gridNode) {
         return this.mapCellGrid.get(gridNode.getY()).get(gridNode.getX());
     }
 
-    public GridNode getGridNodeFromMapCell(MapCell mapCell) {
-        int mapCellRow = GridPane.getRowIndex(mapCell);
-        int mapCellCol = GridPane.getColumnIndex(mapCell);
+    public GridNode getGridNodeFromMapCell(MapEditorMapCell mapEditorMapCell) {
+        int mapCellRow = GridPane.getRowIndex(mapEditorMapCell);
+        int mapCellCol = GridPane.getColumnIndex(mapEditorMapCell);
         return grid.get(mapCellRow).get(mapCellCol);
     }
 

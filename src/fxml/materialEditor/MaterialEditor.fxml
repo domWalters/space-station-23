@@ -23,7 +23,7 @@
         </MenuBar>
     </top>
     <center>
-        <ListView fx:id="materialListView" />
+        <ListView fx:id="materialListView" onKeyPressed="#handleKeyPressOnMaterialListView"/>
     </center>
     <right>
         <GridPane>

@@ -12,8 +12,8 @@ import org.spacestation23.model.grid.GridCreator;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.material.Material;
 import org.spacestation23.model.material.MaterialCreator;
-import org.spacestation23.view.mapEditor.Map;
-import org.spacestation23.view.mapEditor.MapCell;
+import org.spacestation23.view.mapEditor.MapEditorMap;
+import org.spacestation23.view.mapEditor.MapEditorMapCell;
 import org.spacestation23.view.mapEditor.MapEditorMaterialCell;
 
 import java.beans.PropertyChangeEvent;
@@ -31,7 +31,7 @@ public class MapEditorController implements Initializable, PropertyChangeListene
     private ComboBox<Material> materialComboBox;
 
     @FXML
-    private Map map;
+    private MapEditorMap mapEditorMap;
 
     private Grid grid;
 
@@ -43,9 +43,9 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
             grid = GridCreator.loadFromFile(file);
-            map = new Map(grid, this);
-            map.addPropertyChangeListener(this);
-            borderPane.setCenter(map);
+            mapEditorMap = new MapEditorMap(grid, this);
+            mapEditorMap.addPropertyChangeListener(this);
+            borderPane.setCenter(mapEditorMap);
             borderPane.getScene().getWindow().sizeToScene();
         }
     }
@@ -61,9 +61,9 @@ public class MapEditorController implements Initializable, PropertyChangeListene
 
     @FXML
     void handleMaterialComboBoxSelectionChanged() {
-        MapCell currentFocus = map.getCurrentFocus();
+        MapEditorMapCell currentFocus = mapEditorMap.getCurrentFocus();
         if (currentFocus != null) {
-            map.getGridNodeFromMapCell(currentFocus).setMaterial(materialComboBox.getValue());
+            mapEditorMap.getGridNodeFromMapCell(currentFocus).setMaterial(materialComboBox.getValue());
         }
     }
 
@@ -89,12 +89,12 @@ public class MapEditorController implements Initializable, PropertyChangeListene
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("currentFocus") && materialComboBox != null) {
-            MapCell newSelection = (MapCell) evt.getNewValue();
-            GridNode newSelectionGridNode = map.getGridNodeFromMapCell(newSelection);
+            MapEditorMapCell newSelection = (MapEditorMapCell) evt.getNewValue();
+            GridNode newSelectionGridNode = mapEditorMap.getGridNodeFromMapCell(newSelection);
             materialComboBox.getSelectionModel().select(newSelectionGridNode.getMaterial());
-        } else if (evt.getPropertyName().equals("material") && map != null) {
+        } else if (evt.getPropertyName().equals("material") && mapEditorMap != null) {
             GridNode location = (GridNode) evt.getSource();
-            map.getMapCellFromGridNode(location).setMaterial((Material) evt.getNewValue());
+            mapEditorMap.getMapCellFromGridNode(location).setMaterial((Material) evt.getNewValue());
         }
     }
 }

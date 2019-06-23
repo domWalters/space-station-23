@@ -21,7 +21,7 @@
         </MenuBar>
     </top>
     <left>
-        <ListView fx:id="itemListView"/>
+        <ListView fx:id="itemListView" onKeyPressed="#handleKeyPressOnItemListView"/>
     </left>
     <right>
         <GridPane>

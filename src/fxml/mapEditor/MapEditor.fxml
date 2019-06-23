@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import org.spacestation23.view.mapEditor.Map?>
+<?import org.spacestation23.view.mapEditor.MapEditorMap?>
 <BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MapEditorController">
     <top>
         <MenuBar>
@@ -22,7 +22,7 @@
         </MenuBar>
     </top>
     <left>
-        <Map fx:id="map" />
+        <MapEditorMap fx:id="mapEditorMap" />
     </left>
     <right>
       <GridPane>

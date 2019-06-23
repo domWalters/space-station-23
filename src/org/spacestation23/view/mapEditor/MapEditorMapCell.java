@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.spacestation23.model.character.Pawn;
@@ -13,7 +14,7 @@ import org.spacestation23.model.material.Material;
 
 import java.io.IOException;
 
-public class MapCell extends StackPane {
+public class MapEditorMapCell extends StackPane {
 
     @FXML
     private ImageView tileView;
@@ -24,7 +25,7 @@ public class MapCell extends StackPane {
     @FXML
     private Pane focus;
 
-    public MapCell() {
+    public MapEditorMapCell() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapEditorMapCell.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -33,10 +34,10 @@ public class MapCell extends StackPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        this.setFocusedEventHandlers();
+        this.setFocusListener();
     }
 
-    public MapCell(GridNode cell) {
+    public MapEditorMapCell(GridNode cell) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapEditorMapCell.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -54,7 +55,14 @@ public class MapCell extends StackPane {
             this.disablePawn();
         }
         // Set Event Handlers
-        this.setFocusedEventHandlers();
+        this.setFocusListener();
+    }
+
+    @FXML
+    void handleMouseClick(MouseEvent e) {
+        if (e.getButton() == MouseButton.PRIMARY) {
+            this.requestFocus();
+        }
     }
 
     public void enablePawn(Image image) {
@@ -70,27 +78,14 @@ public class MapCell extends StackPane {
         this.tileView.setImage(material.getImgSprite());
     }
 
-    private void focused() {
-        focus.getStyleClass().remove("rect-border-unselected");
-        focus.getStyleClass().add("rect-border-selected");
-    }
-
-    private void unfocused() {
-        focus.getStyleClass().remove("rect-border-selected");
-        focus.getStyleClass().add("rect-border-unselected");
-    }
-
-    private void setFocusedEventHandlers() {
-        this.setOnMouseClicked(e ->  {
-            if (e.getButton() == MouseButton.PRIMARY) {
-                this.requestFocus();
-            }
-        });
+    private void setFocusListener() {
         this.focusedProperty().addListener((ov, oldV, newV) -> {
             if (newV) {
-                this.focused();
+                focus.getStyleClass().remove("rect-border-unselected");
+                focus.getStyleClass().add("rect-border-selected");
             } else {
-                this.unfocused();
+                focus.getStyleClass().remove("rect-border-selected");
+                focus.getStyleClass().add("rect-border-unselected");
             }
         });
     }

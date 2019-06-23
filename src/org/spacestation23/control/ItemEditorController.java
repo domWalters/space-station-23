@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.spacestation23.model.item.Item;
@@ -75,6 +77,13 @@ public class ItemEditorController implements Initializable {
         Item focusedItem = itemListView.getFocusModel().getFocusedItem();
         ItemCreator.items.remove(focusedItem.getItemId());
         itemsObservableList.remove(focusedItem);
+    }
+
+    @FXML
+    void handleKeyPressOnItemListView(KeyEvent e) {
+        if (e.getCode().equals(KeyCode.DELETE) && itemListView.getFocusModel().getFocusedItem() != null) {
+            this.handleDeleteItem();
+        }
     }
 
     @Override

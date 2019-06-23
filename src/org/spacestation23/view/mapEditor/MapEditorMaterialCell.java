@@ -15,7 +15,7 @@ public class MapEditorMaterialCell extends ListCell<Material> {
     private HBox hBox;
 
     @FXML
-    private MapCell itemGraphic;
+    private MapEditorMapCell itemGraphic;
 
     @FXML
     private Label itemLabel;

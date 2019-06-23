@@ -13,8 +13,8 @@ import org.spacestation23.model.item.ItemCreator;
 import org.spacestation23.view.itemEditor.ItemEditorApplication;
 import org.spacestation23.view.main.LoggerStore;
 import org.spacestation23.view.main.SpriteFactory;
-import org.spacestation23.view.mapEditor.Map;
-import org.spacestation23.view.mapEditor.MapCell;
+import org.spacestation23.view.mapEditor.MapEditorMap;
+import org.spacestation23.view.mapEditor.MapEditorMapCell;
 import org.spacestation23.view.mapEditor.MapEditorApplication;
 import org.spacestation23.view.materialEditor.MaterialEditorApplication;
 
@@ -29,7 +29,7 @@ public class MainController implements Initializable, PropertyChangeListener {
     private LoggerStore loggerStore;
 
     @FXML
-    private Map map;
+    private MapEditorMap mapEditorMap;
 
     private Grid grid;
 
@@ -62,12 +62,12 @@ public class MainController implements Initializable, PropertyChangeListener {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        map.overwriteWithMap(new Map(grid, null));
+        mapEditorMap.overwriteWithMap(new MapEditorMap(grid, null));
         for (int row = 0; row < grid.ySize(); row++) {
             for (int col = 0; col < grid.xSize(row); col++) {
                 final int lambdaRow = row;
                 final int lambdaCol = col;
-                map.setOnKeyPressed(lambdaRow, lambdaCol, event -> {
+                mapEditorMap.setOnKeyPressed(lambdaRow, lambdaCol, event -> {
                     Pawn clickedPawn = grid.get(lambdaRow).get(lambdaCol).getPawn();
                     if (clickedPawn != null) {
                         try {
@@ -94,12 +94,12 @@ public class MainController implements Initializable, PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("location") && map != null) {
-            map.getMapCellFromGridNode((GridNode) evt.getOldValue()).disablePawn();
+        if (evt.getPropertyName().equals("location") && mapEditorMap != null) {
+            mapEditorMap.getMapCellFromGridNode((GridNode) evt.getOldValue()).disablePawn();
             Pair newLocationPair = (Pair) evt.getNewValue();
-            MapCell newMapCell = map.getMapCellFromGridNode((GridNode) newLocationPair.getKey());
-            newMapCell.enablePawn((Image) newLocationPair.getValue());
-            newMapCell.requestFocus();
+            MapEditorMapCell newMapEditorMapCell = mapEditorMap.getMapCellFromGridNode((GridNode) newLocationPair.getKey());
+            newMapEditorMapCell.enablePawn((Image) newLocationPair.getValue());
+            newMapEditorMapCell.requestFocus();
         }
     }
 }
