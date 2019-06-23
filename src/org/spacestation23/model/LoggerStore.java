@@ -1,17 +1,18 @@
 package org.spacestation23.model;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
+import javafx.scene.control.TextArea;
+
 import java.util.Arrays;
 
-public class LoggerStore {
+public class LoggerStore extends TextArea {
+
+    private static final int DEFAULT_LINE_COUNT = 3;
 
     private String[] lines;
 
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-
-    public LoggerStore(int numberOfLines) {
-        String[] lines = new String[numberOfLines];
+    public LoggerStore() {
+        super();
+        String[] lines = new String[DEFAULT_LINE_COUNT];
         Arrays.fill(lines, "");
         this.lines = lines;
     }
@@ -24,21 +25,19 @@ public class LoggerStore {
         this.lines = lines;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.pcs.removePropertyChangeListener(listener);
-    }
-
     public void scroll(String newLog) {
         String[] oldLines = this.getLines();
         String[] newLines = new String[oldLines.length];
         if (oldLines.length - 1 >= 0) System.arraycopy(oldLines, 0, newLines, 1, oldLines.length - 1);
         newLines[0] = newLog;
         this.setLines(newLines);
-        this.pcs.firePropertyChange("lines", oldLines, newLines);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String line : newLines) {
+            stringBuilder.append(line);
+            stringBuilder.append("\n");
+        }
+        this.setText(stringBuilder.toString());
     }
 
 }

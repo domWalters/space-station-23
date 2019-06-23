@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import org.spacestation23.model.LoggerStore?>
 <BorderPane fx:id="borderPane" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MainController">
     <top>
         <MenuBar>
@@ -20,7 +21,7 @@
     <right>
         <BorderPane>
             <bottom>
-                <TextArea fx:id="logger" editable="false" focusTraversable="false" prefRowCount="3" wrapText="true" />
+                <LoggerStore fx:id="loggerStore" editable="false" focusTraversable="false" prefRowCount="3" wrapText="true" />
             </bottom>
         </BorderPane>
     </right>

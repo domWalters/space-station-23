@@ -32,20 +32,16 @@ public class MainController implements Initializable, PropertyChangeListener {
     private BorderPane borderPane;
 
     @FXML
-    private TextArea logger;
+    private LoggerStore loggerStore;
 
-//    @FXML
     private Map map;
 
     private Grid grid;
-    private LoggerStore loggerStore;
 
     public MainController() {
         grid = GridLoader.loadFromFile("mapFiles/exampleGrid1.txt");
         Pawn pawn1 = new Pawn("Dom", grid.get(3 - 1).get(3 - 1), SpriteFactory.pawnImg);
         Pawn pawn2 = new Pawn("David", grid.get(6 - 1).get(6 - 1), SpriteFactory.pawnImg);
-        loggerStore = new LoggerStore(3);
-        loggerStore.addPropertyChangeListener(this);
         pawn1.addPropertyChangeListener(this);
         pawn2.addPropertyChangeListener(this);
         ItemCreator.populateItemsFromFile("mapFiles/items.xml");
@@ -78,14 +74,7 @@ public class MainController implements Initializable, PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("lines") && logger != null) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (String line : (String[]) evt.getNewValue()) {
-                stringBuilder.append(line);
-                stringBuilder.append("\n");
-            }
-            logger.setText(stringBuilder.toString());
-        } else if (evt.getPropertyName().equals("location") && map != null) {
+        if (evt.getPropertyName().equals("location") && map != null) {
             map.getMapCellFromGridNode((GridNode) evt.getOldValue()).disablePawn();
             Pair newLocationPair = (Pair) evt.getNewValue();
             MapCell newMapCell = map.getMapCellFromGridNode((GridNode) newLocationPair.getKey());
