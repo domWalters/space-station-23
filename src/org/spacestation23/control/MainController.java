@@ -14,7 +14,7 @@ import org.spacestation23.model.grid.Grid;
 import org.spacestation23.model.grid.GridLoader;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.item.ItemCreator;
-import org.spacestation23.view.itemManager.ItemManagerApplication;
+import org.spacestation23.view.itemEditor.ItemEditorApplication;
 import org.spacestation23.view.main.SpriteFactory;
 import org.spacestation23.view.mapEditor.Map;
 import org.spacestation23.view.mapEditor.MapCell;
@@ -51,8 +51,8 @@ public class MainController implements Initializable, PropertyChangeListener {
     }
 
     @FXML
-    void handleOpenItemManager() {
-        ItemManagerApplication itemManager = new ItemManagerApplication();
+    void handleOpenItemEditor() {
+        ItemEditorApplication itemManager = new ItemEditorApplication();
         itemManager.show();
     }
 
@@ -60,6 +60,11 @@ public class MainController implements Initializable, PropertyChangeListener {
     void handleOpenMapEditor() {
         MapEditorApplication mapEditor = new MapEditorApplication();
         mapEditor.show();
+    }
+
+    @FXML
+    void handleOpenMaterialEditor() {
+
     }
 
     @Override

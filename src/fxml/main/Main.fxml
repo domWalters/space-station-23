@@ -9,8 +9,9 @@
                <Menu text="File" />
                <Menu text="Utilities">
                    <items>
-                       <MenuItem onAction="#handleOpenItemManager" text="Item Manager" />
+                       <MenuItem onAction="#handleOpenItemEditor" text="Item Editor" />
                        <MenuItem onAction="#handleOpenMapEditor" text="Map Editor" />
+                       <MenuItem onAction="#handleOpenMaterialEditor" text="Material Editor"/>
                    </items>
                </Menu>
            </menus>

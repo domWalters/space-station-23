@@ -25,7 +25,7 @@ public class MapCell extends StackPane {
     private Pane focus;
 
     public MapCell() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapCell.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapEditorMapCell.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {
@@ -37,7 +37,7 @@ public class MapCell extends StackPane {
     }
 
     public MapCell(GridNode cell) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapCell.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/mapEditor/MapEditorMapCell.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {

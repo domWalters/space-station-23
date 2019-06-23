@@ -10,14 +10,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.spacestation23.model.item.Item;
 import org.spacestation23.model.item.ItemCreator;
-import org.spacestation23.view.itemManager.ItemManagerListViewCell;
-import org.spacestation23.view.itemManager.alert.ItemCreationSucceededAlert;
+import org.spacestation23.view.itemEditor.ItemEditorListViewCell;
+import org.spacestation23.view.itemEditor.alert.ItemCreationSucceededAlert;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ItemManagerController implements Initializable {
+public class ItemEditorController implements Initializable {
 
     @FXML
     private TextField nameTextField;
@@ -33,7 +33,7 @@ public class ItemManagerController implements Initializable {
 
     private ObservableList<Item> itemsObservableList;
 
-    public ItemManagerController() {
+    public ItemEditorController() {
         itemsObservableList = FXCollections.observableArrayList(ItemCreator.items.values());
     }
 
@@ -82,7 +82,7 @@ public class ItemManagerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         itemListView.setItems(itemsObservableList);
-        itemListView.setCellFactory(itemListView -> new ItemManagerListViewCell());
+        itemListView.setCellFactory(itemListView -> new ItemEditorListViewCell());
         itemListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 nameTextField.setText(newValue.getName());

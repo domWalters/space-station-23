@@ -1,4 +1,4 @@
-package org.spacestation23.view.itemManager;
+package org.spacestation23.view.itemEditor;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import org.spacestation23.model.item.Item;
 
 import java.io.IOException;
 
-public class ItemManagerListViewCell extends ListCell<Item> {
+public class ItemEditorListViewCell extends ListCell<Item> {
 
     @FXML
     private Label idLabel;
@@ -34,7 +34,7 @@ public class ItemManagerListViewCell extends ListCell<Item> {
             setGraphic(null);
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("/fxml/itemManager/ItemManagerListViewCell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/fxml/itemEditor/ItemEditorListViewCell.fxml"));
                 mLLoader.setController(this);
                 try {
                     mLLoader.load();

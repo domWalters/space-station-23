@@ -1,4 +1,4 @@
-package org.spacestation23.view.itemManager;
+package org.spacestation23.view.itemEditor;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,15 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ItemManagerApplication extends Stage {
+public class ItemEditorApplication extends Stage {
 
-    public ItemManagerApplication() {
+    public ItemEditorApplication() {
         super();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/itemManager/ItemManager.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/itemEditor/ItemEditor.fxml"));
             Scene scene = new Scene(root);
             this.setScene(scene);
-            this.setTitle("Space-Station-23: Item Manager");
+            this.setTitle("Space-Station-23: Item Editor");
         } catch (IOException e) {
 
         }
