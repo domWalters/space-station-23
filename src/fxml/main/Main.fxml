@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import org.spacestation23.view.main.LoggerStore?>
-<BorderPane fx:id="borderPane" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MainController">
+<?import org.spacestation23.view.mapEditor.Map?>
+<BorderPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MainController">
     <top>
         <MenuBar>
            <menus>
@@ -18,6 +19,9 @@
            </menus>
         </MenuBar>
     </top>
+    <left>
+        <Map fx:id="map" />
+    </left>
     <right>
         <BorderPane>
             <bottom>

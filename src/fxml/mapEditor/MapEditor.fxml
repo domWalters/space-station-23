@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.spacestation23.view.mapEditor.Map?>
 <BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MapEditorController">
     <top>
         <MenuBar>
@@ -21,12 +22,9 @@
         </MenuBar>
     </top>
     <left>
-
+        <Map fx:id="map" />
     </left>
     <right>
-
-    </right>
-   <right>
       <GridPane>
          <children>
             <Label text="GridNode Properties" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
@@ -34,5 +32,5 @@
             <ComboBox fx:id="materialComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" focusTraversable="false" onAction="#handleMaterialComboBoxSelectionChanged" />
          </children>
       </GridPane>
-   </right>
+    </right>
 </BorderPane>
