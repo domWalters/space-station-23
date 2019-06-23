@@ -16,9 +16,7 @@ import org.spacestation23.view.mapEditor.MapEditorMaterialCell;
 import org.spacestation23.view.materialEditor.alert.MaterialCreationSucceededAlert;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 public class MaterialEditorController implements Initializable {
@@ -54,8 +52,7 @@ public class MaterialEditorController implements Initializable {
         if (file != null) {
             MaterialCreator.populateMaterialsFromFile(file.getPath());
         }
-        ObservableList<Material> materials = FXCollections.observableArrayList(MaterialCreator.materials.values());
-        materialListView.setItems(materials);
+        materialsObservableList.setAll(MaterialCreator.materials.values());
     }
 
     @FXML
@@ -98,14 +95,12 @@ public class MaterialEditorController implements Initializable {
             MaterialCreator.materials.put(newMaterial.getName(), newMaterial);
             MaterialCreationSucceededAlert goodAlert = new MaterialCreationSucceededAlert(newMaterial.getName());
             goodAlert.showAndWait();
-            ObservableList<Material> materials = FXCollections.observableArrayList(MaterialCreator.materials.values());
-            materialListView.setItems(materials);
+            materialsObservableList.add(newMaterial);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        passableChoiceBox.getItems().addAll(true, false);
         materialListView.setItems(materialsObservableList);
         materialListView.setCellFactory(itemListView -> new MapEditorMaterialCell());
         materialListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

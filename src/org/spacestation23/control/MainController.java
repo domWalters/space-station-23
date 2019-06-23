@@ -2,11 +2,8 @@ package org.spacestation23.control;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import org.spacestation23.model.LoggerStore;
 import org.spacestation23.model.character.Pawn;

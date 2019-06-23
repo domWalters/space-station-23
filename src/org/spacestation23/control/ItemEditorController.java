@@ -47,8 +47,7 @@ public class ItemEditorController implements Initializable {
             ItemCreator.items.put(newItem.getItemId(), newItem);
             ItemCreationSucceededAlert goodAlert = new ItemCreationSucceededAlert(newItem.getItemId());
             goodAlert.showAndWait();
-            ObservableList<Item> items = FXCollections.observableArrayList(ItemCreator.items.values());
-            itemListView.setItems(items);
+            itemsObservableList.add(newItem);
         }
     }
 
@@ -59,8 +58,7 @@ public class ItemEditorController implements Initializable {
         if (file != null) {
             ItemCreator.populateItemsFromFile(file.getPath());
         }
-        ObservableList<Item> items = FXCollections.observableArrayList(ItemCreator.items.values());
-        itemListView.setItems(items);
+        itemsObservableList.setAll(ItemCreator.items.values());
     }
 
     @FXML
