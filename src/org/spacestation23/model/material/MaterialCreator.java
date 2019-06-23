@@ -100,7 +100,7 @@ public class MaterialCreator {
         Material newMaterial = new Material(materialName, materialStringSprite, materialPassable, materialInventoryCapacity,materialImageSprite);
         if (!newMaterial.getName().equals(Material.INVALID_NAME)) {
             if (!newMaterial.getCharacterSprite().equals(Material.INVALID_STRING_SPRITE)) {
-                if (!newMaterial.getInventoryCapacity().equals(Material.INVLAID_INVENTORY_CAPACITY)) {
+                if (!newMaterial.getInventoryCapacity().equals(Material.INVALID_INVENTORY_CAPACITY)) {
                     if (!newMaterial.getImgSprite().getUrl().equals(Material.INVALID_IMAGE_SPRITE)) {
                         return newMaterial;
                     } else {

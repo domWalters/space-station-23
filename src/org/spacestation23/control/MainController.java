@@ -65,10 +65,10 @@ public class MainController implements Initializable, PropertyChangeListener {
         map.overwriteWithMap(new Map(grid, null));
         for (int row = 0; row < grid.ySize(); row++) {
             for (int col = 0; col < grid.xSize(row); col++) {
-                final int lambaRow = row;
-                final int lambaCol = col;
-                map.setOnKeyPressed(lambaRow, lambaCol, event -> {
-                    Pawn clickedPawn = grid.get(lambaRow).get(lambaCol).getPawn();
+                final int lambdaRow = row;
+                final int lambdaCol = col;
+                map.setOnKeyPressed(lambdaRow, lambdaCol, event -> {
+                    Pawn clickedPawn = grid.get(lambdaRow).get(lambdaCol).getPawn();
                     if (clickedPawn != null) {
                         try {
                             switch(event.getCode()) {

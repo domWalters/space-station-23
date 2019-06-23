@@ -8,7 +8,7 @@ public class Material {
 
     public static final String INVALID_NAME = "";
     public static final String INVALID_STRING_SPRITE = "";
-    public static final int INVLAID_INVENTORY_CAPACITY = -1;
+    public static final int INVALID_INVENTORY_CAPACITY = -1;
     public static final String INVALID_IMAGE_SPRITE = "";
 
     private String name;
@@ -36,7 +36,7 @@ public class Material {
                     this.setInventoryCapacity(materialInventoryCapacityNumber);
                     this.setImgSprite(new Image(materialImageSprite));
                 } catch (NumberFormatException f) {
-                    this.setInventoryCapacity(INVLAID_INVENTORY_CAPACITY);
+                    this.setInventoryCapacity(INVALID_INVENTORY_CAPACITY);
                 }
             } else {
                 this.setCharacterSprite(INVALID_STRING_SPRITE);
