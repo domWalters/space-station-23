@@ -9,10 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import org.spacestation23.model.Material;
+import org.spacestation23.model.material.Material;
 import org.spacestation23.model.grid.Grid;
 import org.spacestation23.model.grid.GridLoader;
 import org.spacestation23.model.grid.GridNode;
+import org.spacestation23.model.material.MaterialCreator;
 import org.spacestation23.view.mapEditor.Map;
 import org.spacestation23.view.mapEditor.MapCell;
 import org.spacestation23.view.mapEditor.MapEditorMaterialCell;
@@ -81,7 +82,11 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         map = new Map(grid, this);
         map.addPropertyChangeListener(this);
         borderPane.setCenter(map);
-        materialComboBox.getItems().addAll(Material.VACUUM, Material.STEELBULKHEAD, Material.STEELBULKHEADDOOR, Material.STEELBULKHEADFLOOR);
+        Material vacuum = MaterialCreator.materials.get("VACUUM");
+        Material steelBulkhead = MaterialCreator.materials.get("STEELBULKHEAD");
+        Material steelBulkheadDoor = MaterialCreator.materials.get("STEELBULKHEADDOOR");
+        Material steelBulkheadFloor = MaterialCreator.materials.get("STEELBULKHEADFLOOR");
+        materialComboBox.getItems().addAll(vacuum, steelBulkhead, steelBulkheadDoor, steelBulkheadFloor);
         materialComboBox.setCellFactory(materialComboBox -> new MapEditorMaterialCell());
         materialComboBox.getSelectionModel().selectFirst();
         materialComboBox.setConverter(new StringConverter<>() {

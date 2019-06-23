@@ -19,6 +19,7 @@ import org.spacestation23.view.main.SpriteFactory;
 import org.spacestation23.view.mapEditor.Map;
 import org.spacestation23.view.mapEditor.MapCell;
 import org.spacestation23.view.mapEditor.MapEditorApplication;
+import org.spacestation23.view.materialEditor.MaterialEditorApplication;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -64,7 +65,8 @@ public class MainController implements Initializable, PropertyChangeListener {
 
     @FXML
     void handleOpenMaterialEditor() {
-
+        MaterialEditorApplication materialEditor = new MaterialEditorApplication();
+        materialEditor.show();
     }
 
     @Override

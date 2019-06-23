@@ -1,6 +1,6 @@
 package org.spacestation23.model.grid;
 
-import org.spacestation23.model.Material;
+import org.spacestation23.model.material.Material;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.item.Inventory;
 

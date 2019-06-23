@@ -1,6 +1,7 @@
 package org.spacestation23.model.grid;
 
-import org.spacestation23.model.Material;
+import org.spacestation23.model.material.Material;
+import org.spacestation23.model.material.MaterialCreator;
 
 import java.io.*;
 
@@ -16,6 +17,13 @@ public class GridLoader {
     }
 
     public static Grid loadFromFile(File file) {
+        MaterialCreator.populateMaterialsFromFile("mapFiles/materials.xml");
+        Material vacuum = MaterialCreator.materials.get("VACUUM");
+        Material steelBulkhead = MaterialCreator.materials.get("STEELBULKHEAD");
+        Material steelBulkheadDoor = MaterialCreator.materials.get("STEELBULKHEADDOOR");
+        Material steelBulkheadFloor = MaterialCreator.materials.get("STEELBULKHEADFLOOR");
+
+
         Grid grid = new Grid();
         try {
             FileReader fr = new FileReader(file);
@@ -29,14 +37,14 @@ public class GridLoader {
                 for (String textNode : textRow) {
                     x++;
                     GridNode gridNode;
-                    if (textNode.equals(Material.VACUUM.characterSprite)) {
-                        gridNode = new GridNode(x, y, grid, Material.VACUUM);
-                    } else if (textNode.equals(Material.STEELBULKHEAD.characterSprite)) {
-                        gridNode = new GridNode(x, y, grid, Material.STEELBULKHEAD);
-                    } else if (textNode.equals(Material.STEELBULKHEADDOOR.characterSprite)) {
-                        gridNode = new GridNode(x, y, grid, Material.STEELBULKHEADDOOR);
-                    } else if (textNode.equals(Material.STEELBULKHEADFLOOR.characterSprite)) {
-                        gridNode = new GridNode(x, y, grid, Material.STEELBULKHEADFLOOR);
+                    if (textNode.equals(vacuum.characterSprite)) {
+                        gridNode = new GridNode(x, y, grid, vacuum);
+                    } else if (textNode.equals(steelBulkhead.characterSprite)) {
+                        gridNode = new GridNode(x, y, grid, steelBulkhead);
+                    } else if (textNode.equals(steelBulkheadDoor.characterSprite)) {
+                        gridNode = new GridNode(x, y, grid, steelBulkheadDoor);
+                    } else if (textNode.equals(steelBulkheadFloor.characterSprite)) {
+                        gridNode = new GridNode(x, y, grid, steelBulkheadFloor);
                     } else {
                         gridNode = null;
                     }

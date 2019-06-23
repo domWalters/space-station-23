@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
-import org.spacestation23.model.Material;
+import org.spacestation23.model.material.Material;
 
 import java.io.IOException;
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MaterialEditorController">
+    <top>
+        <MenuBar>
+           <menus>
+               <Menu text="File">
+                  <items>
+                      <MenuItem onAction="#handleOpenMaterialsXML" text="Open..." />
+                      <MenuItem onAction="#handleSaveMaterialsXML" text="Save..." />
+                  </items>
+               </Menu>
+               <Menu text="Edit">
+                  <items>
+                      <MenuItem onAction="#handleDeleteMaterial" text="Delete Material" />
+                  </items>
+               </Menu>
+           </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <ListView fx:id="materialListView" />
+    </left>
+    <right>
+        <GridPane>
+            <children>
+                <Label text="Material Properties" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+                <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="String Sprite:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="stringSpriteTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Passable:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <ChoiceBox fx:id="passableChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Inventory Capacity:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="inventoryCapacityTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Image Sprite:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="imageSpriteTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+    </right>
+    <center>
+        <ImageView fx:id="imageView" />
+    </center>
+</BorderPane>

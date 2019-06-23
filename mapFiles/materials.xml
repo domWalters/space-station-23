@@ -1,0 +1,26 @@
+<materials>
+    <material name="VACUUM">
+        <characterSprite>.</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>/resources/tileSprites/vacuum.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEAD">
+        <characterSprite>X</characterSprite>
+        <passable>false</passable>
+        <inventoryCapacity>0</inventoryCapacity>
+        <imageSprite>/resources/tileSprites/steel-wall.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEADDOOR">
+        <characterSprite>+</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>25</inventoryCapacity>
+        <imageSprite>/resources/tileSprites/steel-door.png</imageSprite>
+    </material>
+    <material name="STEELBULKHEADFLOOR">
+        <characterSprite>-</characterSprite>
+        <passable>true</passable>
+        <inventoryCapacity>50</inventoryCapacity>
+        <imageSprite>/resources/tileSprites/steel-floor.png</imageSprite>
+    </material>
+</materials>
