@@ -2,7 +2,7 @@ package org.spacestation23.view.mapEditor;
 
 import javafx.scene.layout.GridPane;
 import org.spacestation23.control.MapEditorController;
-import org.spacestation23.model.LoggerStore;
+import org.spacestation23.view.main.LoggerStore;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.grid.Grid;
 import org.spacestation23.model.grid.GridNode;

@@ -5,7 +5,7 @@ import org.spacestation23.model.material.MaterialCreator;
 
 import java.io.*;
 
-public class GridLoader {
+public class GridCreator {
     /*
         Upper left corner is (0,0).
         Right increases x.

@@ -5,10 +5,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Pair;
-import org.spacestation23.model.LoggerStore;
+import org.spacestation23.view.main.LoggerStore;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.grid.Grid;
-import org.spacestation23.model.grid.GridLoader;
+import org.spacestation23.model.grid.GridCreator;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.item.ItemCreator;
 import org.spacestation23.view.itemEditor.ItemEditorApplication;
@@ -36,7 +36,7 @@ public class MainController implements Initializable, PropertyChangeListener {
     private Grid grid;
 
     public MainController() {
-        grid = GridLoader.loadFromFile("mapFiles/exampleGrid1.txt");
+        grid = GridCreator.loadFromFile("mapFiles/exampleGrid1.txt");
         Pawn pawn1 = new Pawn("Dom", grid.get(3 - 1).get(3 - 1), SpriteFactory.pawnImg);
         Pawn pawn2 = new Pawn("David", grid.get(6 - 1).get(6 - 1), SpriteFactory.pawnImg);
         pawn1.addPropertyChangeListener(this);

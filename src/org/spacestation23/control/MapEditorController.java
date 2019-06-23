@@ -10,7 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.spacestation23.model.grid.Grid;
-import org.spacestation23.model.grid.GridLoader;
+import org.spacestation23.model.grid.GridCreator;
 import org.spacestation23.model.grid.GridNode;
 import org.spacestation23.model.material.Material;
 import org.spacestation23.model.material.MaterialCreator;
@@ -43,7 +43,7 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
         if (file != null) {
-            grid = GridLoader.loadFromFile(file);
+            grid = GridCreator.loadFromFile(file);
             map = new Map(grid, this);
             map.addPropertyChangeListener(this);
             borderPane.setCenter(map);
@@ -56,7 +56,7 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showSaveDialog(new Stage());
         if (file != null) {
-            GridLoader.saveToFile(grid, file);
+            GridCreator.saveToFile(grid, file);
         }
     }
 
@@ -64,16 +64,7 @@ public class MapEditorController implements Initializable, PropertyChangeListene
     void handleMaterialComboBoxSelectionChanged() {
         MapCell currentFocus = map.getCurrentFocus();
         if (currentFocus != null) {
-            int focusedRow = GridPane.getRowIndex(currentFocus);
-            int focusedCol = GridPane.getColumnIndex(currentFocus);
-            for (Node node : map.getChildren()) {
-                int row = GridPane.getRowIndex(node);
-                int col = GridPane.getColumnIndex(node);
-                if (focusedCol == col && focusedRow == row) {
-                    GridNode selected = grid.get(row).get(col);
-                    selected.setMaterial(materialComboBox.getValue());
-                }
-            }
+            map.getGridNodeFromMapCell(currentFocus).setMaterial(materialComboBox.getValue());
         }
     }
 

@@ -6,7 +6,7 @@
 <GridPane fx:id="gridPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="idLabel" GridPane.columnIndex="0" />
-        <Separator fx:id="separator" orientation="VERTICAL" GridPane.columnIndex="1" />
+        <Separator orientation="VERTICAL" GridPane.columnIndex="1" />
         <Label fx:id="nameLabel" GridPane.columnIndex="2" />
     </children>
 </GridPane>

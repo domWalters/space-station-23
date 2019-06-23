@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.GridPane;
 import org.spacestation23.model.item.Item;
 
@@ -17,9 +16,6 @@ public class ItemEditorListViewCell extends ListCell<Item> {
 
     @FXML
     private GridPane gridPane;
-
-    @FXML
-    private Separator separator;
 
     @FXML
     private Label nameLabel;
