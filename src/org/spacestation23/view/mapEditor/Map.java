@@ -46,6 +46,16 @@ public class Map extends GridPane {
         }
     }
 
+    public MapCell getMapCellFromGridNode(GridNode gridNode) {
+        return this.mapCellGrid.get(gridNode.getY()).get(gridNode.getX());
+    }
+
+    public GridNode getGridNodeFromMapCell(MapCell mapCell) {
+        int mapCellRow = GridPane.getRowIndex(mapCell);
+        int mapCellCol = GridPane.getColumnIndex(mapCell);
+        return grid.get(mapCellRow).get(mapCellCol);
+    }
+
     public void setCurrentFocus(MapCell mapCell) {
         MapCell oldFocus = this.currentFocus;
         this.currentFocus = mapCell;

@@ -7,9 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import org.spacestation23.model.material.Material;
 import org.spacestation23.model.character.Pawn;
 import org.spacestation23.model.grid.GridNode;
+import org.spacestation23.model.material.Material;
 
 import java.io.IOException;
 

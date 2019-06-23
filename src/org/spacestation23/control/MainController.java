@@ -86,22 +86,11 @@ public class MainController implements Initializable, PropertyChangeListener {
             }
             logger.setText(stringBuilder.toString());
         } else if (evt.getPropertyName().equals("location") && map != null) {
-            GridNode oldLocation = (GridNode) evt.getOldValue();
+            map.getMapCellFromGridNode((GridNode) evt.getOldValue()).disablePawn();
             Pair newLocationPair = (Pair) evt.getNewValue();
-            GridNode newLocation = (GridNode) newLocationPair.getKey();
-            Image pawnSprite = (Image) newLocationPair.getValue();
-            for (Node node : map.getChildren()) {
-                MapCell mapCell = (MapCell) node;
-                int row = GridPane.getRowIndex(node);
-                int col = GridPane.getColumnIndex(node);
-                if (oldLocation.getX() == col && oldLocation.getY() == row) {
-                    mapCell.disablePawn();
-                }
-                if (newLocation.getX() == col && newLocation.getY() == row) {
-                    mapCell.enablePawn(pawnSprite);
-                    mapCell.requestFocus();
-                }
-            }
+            MapCell newMapCell = map.getMapCellFromGridNode((GridNode) newLocationPair.getKey());
+            newMapCell.enablePawn((Image) newLocationPair.getValue());
+            newMapCell.requestFocus();
         }
     }
 }

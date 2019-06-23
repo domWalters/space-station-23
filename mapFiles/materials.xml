@@ -20,7 +20,7 @@
     </material>
     <material name="STEELBULKHEADDOOR">
         <characterSprite>+</characterSprite>
-        <passable>false</passable>
+        <passable>true</passable>
         <inventoryCapacity>25</inventoryCapacity>
         <imageSprite>file:/home/dominic/IdeaProjects/SpaceStation23/out/production/SpaceStation23/resources/tileSprites/steel-door.png</imageSprite>
     </material>

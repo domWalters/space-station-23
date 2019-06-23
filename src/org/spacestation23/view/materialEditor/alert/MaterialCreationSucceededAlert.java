@@ -1,7 +1,6 @@
 package org.spacestation23.view.materialEditor.alert;
 
 import javafx.scene.control.Alert;
-import org.spacestation23.model.item.ItemCreator;
 import org.spacestation23.model.material.MaterialCreator;
 
 public class MaterialCreationSucceededAlert extends Alert {

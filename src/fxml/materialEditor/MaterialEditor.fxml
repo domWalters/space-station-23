@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MaterialEditorController">
     <top>
         <MenuBar>
@@ -22,9 +20,9 @@
            </menus>
         </MenuBar>
     </top>
-    <left>
+    <center>
         <ListView fx:id="materialListView" />
-    </left>
+    </center>
     <right>
         <GridPane>
             <children>
@@ -43,7 +41,4 @@
             </children>
         </GridPane>
     </right>
-    <center>
-        <ImageView fx:id="imageView" />
-    </center>
 </BorderPane>

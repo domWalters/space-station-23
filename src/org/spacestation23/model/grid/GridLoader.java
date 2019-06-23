@@ -18,10 +18,6 @@ public class GridLoader {
 
     public static Grid loadFromFile(File file) {
         MaterialCreator.populateMaterialsFromFile("mapFiles/materials.xml");
-        Material vacuum = MaterialCreator.materials.get("VACUUM");
-        Material steelBulkhead = MaterialCreator.materials.get("STEELBULKHEAD");
-        Material steelBulkheadDoor = MaterialCreator.materials.get("STEELBULKHEADDOOR");
-        Material steelBulkheadFloor = MaterialCreator.materials.get("STEELBULKHEADFLOOR");
         Grid grid = new Grid();
         try {
             FileReader fr = new FileReader(file);
@@ -34,17 +30,12 @@ public class GridLoader {
                 y++;
                 for (String textNode : textRow) {
                     x++;
-                    GridNode gridNode;
-                    if (textNode.equals(vacuum.getCharacterSprite())) {
-                        gridNode = new GridNode(x, y, grid, vacuum);
-                    } else if (textNode.equals(steelBulkhead.getCharacterSprite())) {
-                        gridNode = new GridNode(x, y, grid, steelBulkhead);
-                    } else if (textNode.equals(steelBulkheadDoor.getCharacterSprite())) {
-                        gridNode = new GridNode(x, y, grid, steelBulkheadDoor);
-                    } else if (textNode.equals(steelBulkheadFloor.getCharacterSprite())) {
-                        gridNode = new GridNode(x, y, grid, steelBulkheadFloor);
-                    } else {
-                        gridNode = null;
+                    GridNode gridNode = null;
+                    for (Material material : MaterialCreator.materials.values()) {
+                        if (textNode.equals(material.getCharacterSprite())) {
+                            gridNode = new GridNode(x, y, grid, material);
+                            break;
+                        }
                     }
                     row.add(gridNode);
                 }

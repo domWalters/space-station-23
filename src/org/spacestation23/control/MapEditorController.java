@@ -9,10 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import org.spacestation23.model.material.Material;
 import org.spacestation23.model.grid.Grid;
 import org.spacestation23.model.grid.GridLoader;
 import org.spacestation23.model.grid.GridNode;
+import org.spacestation23.model.material.Material;
 import org.spacestation23.model.material.MaterialCreator;
 import org.spacestation23.view.mapEditor.Map;
 import org.spacestation23.view.mapEditor.MapCell;
@@ -82,11 +82,7 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         map = new Map(grid, this);
         map.addPropertyChangeListener(this);
         borderPane.setCenter(map);
-        Material vacuum = MaterialCreator.materials.get("VACUUM");
-        Material steelBulkhead = MaterialCreator.materials.get("STEELBULKHEAD");
-        Material steelBulkheadDoor = MaterialCreator.materials.get("STEELBULKHEADDOOR");
-        Material steelBulkheadFloor = MaterialCreator.materials.get("STEELBULKHEADFLOOR");
-        materialComboBox.getItems().addAll(vacuum, steelBulkhead, steelBulkheadDoor, steelBulkheadFloor);
+        materialComboBox.getItems().addAll(MaterialCreator.materials.values());
         materialComboBox.setCellFactory(materialComboBox -> new MapEditorMaterialCell());
         materialComboBox.getSelectionModel().selectFirst();
         materialComboBox.setConverter(new StringConverter<>() {
@@ -107,25 +103,11 @@ public class MapEditorController implements Initializable, PropertyChangeListene
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("currentFocus") && materialComboBox != null) {
             MapCell newSelection = (MapCell) evt.getNewValue();
-            int newRow = GridPane.getRowIndex(newSelection);
-            int newCol = GridPane.getColumnIndex(newSelection);
-            for (Node node : map.getChildren()) {
-                int row = GridPane.getRowIndex(node);
-                int col = GridPane.getColumnIndex(node);
-                if (newCol == col && newRow == row) {
-                    materialComboBox.getSelectionModel().select(grid.get(row).get(col).getMaterial());
-                }
-            }
+            GridNode newSelectionGridNode = map.getGridNodeFromMapCell(newSelection);
+            materialComboBox.getSelectionModel().select(newSelectionGridNode.getMaterial());
         } else if (evt.getPropertyName().equals("material") && map != null) {
             GridNode location = (GridNode) evt.getSource();
-            for (Node node : map.getChildren()) {
-                MapCell mapCell = (MapCell) node;
-                int row = GridPane.getRowIndex(node);
-                int col = GridPane.getColumnIndex(node);
-                if (location.getX() == col && location.getY() == row) {
-                    mapCell.setMaterial((Material) evt.getNewValue());
-                }
-            }
+            map.getMapCellFromGridNode(location).setMaterial((Material) evt.getNewValue());
         }
     }
 }

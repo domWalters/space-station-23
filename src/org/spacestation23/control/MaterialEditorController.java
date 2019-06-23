@@ -5,10 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.spacestation23.model.material.Material;
@@ -39,9 +37,6 @@ public class MaterialEditorController implements Initializable {
 
     @FXML
     private TextField imageSpriteTextField;
-
-    @FXML
-    private ImageView imageView;
 
     private ObservableList<Material> materialsObservableList;
 
