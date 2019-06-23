@@ -9,6 +9,7 @@ import org.spacestation23.model.item.ItemStack;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
 import static org.spacestation23.model.item.Inventory.CHARACTER_DEFAULT_INVENTORY_STACK_CAPACITY;
 
@@ -18,7 +19,7 @@ public class Pawn {
     private Inventory inventory;
     private ItemStack equippedItem;
 
-    private GridNode location;
+    private GridNode location;      // Can be observed
     private Image sprite;
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -117,4 +118,28 @@ public class Pawn {
         this.move(this.getLocation().getX() > 0, 0, -1, "L");
     }
 
+    @Override
+    public String toString() {
+        return "Pawn{" +
+                "name='" + name + '\'' +
+                ", location=" + location +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pawn)) return false;
+        Pawn pawn = (Pawn) o;
+        return name.equals(pawn.name) &&
+                Objects.equals(inventory, pawn.inventory) &&
+                Objects.equals(equippedItem, pawn.equippedItem) &&
+                location.equals(pawn.location) &&
+                Objects.equals(sprite, pawn.sprite);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, inventory, equippedItem, location, sprite);
+    }
 }

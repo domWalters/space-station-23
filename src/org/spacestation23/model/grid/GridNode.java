@@ -15,7 +15,7 @@ public class GridNode implements Serializable {
     private Integer y;
     private Grid grid;
 
-    private Material material;
+    private Material material;      // Can be observed
     private Inventory inventory;
     private Pawn pawn;
 

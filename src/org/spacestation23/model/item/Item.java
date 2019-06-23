@@ -76,6 +76,15 @@ public class Item {
     }
 
     @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", itemId=" + itemId +
+                ", stackCapacity=" + stackCapacity +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Item)) return false;
@@ -87,12 +96,6 @@ public class Item {
     @Override
     public int hashCode() {
         return Objects.hash(name, itemId);
-    }
-
-    public String toString() {
-        return "Item[Name: " + this.getName()
-                + ", ID: " + this.getItemId()
-                + ", Stack Capacity: " + this.getStackCapacity() + "]";
     }
 
     public String toStringForAlert() {
