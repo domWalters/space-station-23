@@ -46,7 +46,7 @@ public class MapCell extends StackPane {
             throw new RuntimeException(exception);
         }
         // Set Images
-        tileView.setImage(cell.getMaterial().imgSprite);
+        tileView.setImage(cell.getMaterial().getImgSprite());
         Pawn pawn = cell.getPawn();
         if (pawn != null) {
             pawnView.setImage(pawn.getSprite());
@@ -67,7 +67,7 @@ public class MapCell extends StackPane {
     }
 
     public void setMaterial(Material material) {
-        this.tileView.setImage(material.imgSprite);
+        this.tileView.setImage(material.getImgSprite());
     }
 
     private void focused() {

@@ -87,7 +87,7 @@ public class Pawn {
         GridNode location = this.getLocation();
         if (predicate) {
             GridNode newLocation = location.getGrid().get(location.getY() + dy).get(location.getX() + dx);
-            if (newLocation.getMaterial().passable && newLocation.getPawn() == null) {
+            if (newLocation.getMaterial().isPassable() && newLocation.getPawn() == null) {
                 location.setPawn(null);
                 this.setLocation(newLocation);
                 newLocation.setPawn(this);

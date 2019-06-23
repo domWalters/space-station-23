@@ -1,6 +1,7 @@
 package org.spacestation23.model.material;
 
 import javafx.scene.image.Image;
+import org.spacestation23.view.materialEditor.alert.MaterialCreationFailedAlert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -64,22 +65,22 @@ public class MaterialCreator {
                 // top level with name
                 Element materialElement = doc.createElement("material");
                 rootElement.appendChild(materialElement);
-                materialElement.setAttribute("name", material.name);
+                materialElement.setAttribute("name", material.getName());
                 // characterSprite
                 Element characterSpriteElement = doc.createElement("characterSprite");
-                characterSpriteElement.appendChild(doc.createTextNode(material.characterSprite));
+                characterSpriteElement.appendChild(doc.createTextNode(material.getCharacterSprite()));
                 materialElement.appendChild(characterSpriteElement);
                 // passable
                 Element passableElement = doc.createElement("passable");
-                passableElement.appendChild(doc.createTextNode("" + material.passable));
+                passableElement.appendChild(doc.createTextNode("" + material.isPassable()));
                 materialElement.appendChild(passableElement);
                 // inventoryCapacity
                 Element inventoryCapacityElement = doc.createElement("inventoryCapacity");
-                inventoryCapacityElement.appendChild(doc.createTextNode("" + material.inventoryCapacity));
+                inventoryCapacityElement.appendChild(doc.createTextNode("" + material.getInventoryCapacity()));
                 materialElement.appendChild(inventoryCapacityElement);
                 // imageSprite
                 Element imageSpriteElement = doc.createElement("imageSprite");
-                imageSpriteElement.appendChild(doc.createTextNode(material.imgSprite.getUrl()));
+                imageSpriteElement.appendChild(doc.createTextNode(material.getImgSprite().getUrl()));
                 materialElement.appendChild(imageSpriteElement);
             }
             // Create file
@@ -92,6 +93,30 @@ public class MaterialCreator {
         } catch (ParserConfigurationException | TransformerException e) {
 
         }
+    }
+
+    public static Material createMaterialFromStrings(String materialName, String materialStringSprite, String materialPassable, String materialInventoryCapacity, String materialImageSprite) {
+        MaterialCreationFailedAlert alert = new MaterialCreationFailedAlert();
+        Material newMaterial = new Material(materialName, materialStringSprite, materialPassable, materialInventoryCapacity,materialImageSprite);
+        if (!newMaterial.getName().equals(Material.INVALID_NAME)) {
+            if (!newMaterial.getCharacterSprite().equals(Material.INVALID_STRING_SPRITE)) {
+                if (!newMaterial.getInventoryCapacity().equals(Material.INVLAID_INVENTORY_CAPACITY)) {
+                    if (!newMaterial.getImgSprite().getUrl().equals(Material.INVALID_IMAGE_SPRITE)) {
+                        return newMaterial;
+                    } else {
+                        alert.updateContentText("Image Sprite didn't resolve correctly.");
+                    }
+                } else {
+                    alert.updateContentText("Inventory Capacity was negative.");
+                }
+            } else {
+                alert.updateContentText("String Sprite was the empty string.");
+            }
+        } else {
+            alert.updateContentText("Material Name was the empty string.");
+        }
+        alert.showAndWait();
+        return null;
     }
 
 }

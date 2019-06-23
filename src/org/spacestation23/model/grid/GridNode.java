@@ -27,7 +27,7 @@ public class GridNode implements Serializable {
         this.y = y;
         this.grid = grid;
         this.material = material;
-        this.inventory = (material.passable) ? new Inventory("Floor at (" + x + ", " + y + ")", material.inventoryCapacity) : null;
+        this.inventory = (material.isPassable()) ? new Inventory("Floor at (" + x + ", " + y + ")", material.getInventoryCapacity()) : null;
         this.pawn = null;
     }
 

@@ -28,7 +28,7 @@ public class Grid {
         for (GridRow row : this.getGrid()) {
             for (GridNode cell : row.getGridRow()) {
                 if (cell.getPawn() == null) {
-                    s.append(cell.getMaterial().imgSprite);
+                    s.append(cell.getMaterial().getImgSprite());
                 } else {
                     s.append(cell.getPawn().getSprite());
                 }

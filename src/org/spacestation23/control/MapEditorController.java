@@ -92,13 +92,13 @@ public class MapEditorController implements Initializable, PropertyChangeListene
         materialComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(Material material) {
-                return material.name;
+                return material.getName();
             }
 
             @Override
             public Material fromString(String string) {
                 return materialComboBox.getItems().stream().filter(ap ->
-                        ap.name.equals(string)).findFirst().orElse(null);
+                        ap.getName().equals(string)).findFirst().orElse(null);
             }
         });
     }

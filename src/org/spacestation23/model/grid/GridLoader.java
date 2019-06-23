@@ -22,8 +22,6 @@ public class GridLoader {
         Material steelBulkhead = MaterialCreator.materials.get("STEELBULKHEAD");
         Material steelBulkheadDoor = MaterialCreator.materials.get("STEELBULKHEADDOOR");
         Material steelBulkheadFloor = MaterialCreator.materials.get("STEELBULKHEADFLOOR");
-
-
         Grid grid = new Grid();
         try {
             FileReader fr = new FileReader(file);
@@ -37,13 +35,13 @@ public class GridLoader {
                 for (String textNode : textRow) {
                     x++;
                     GridNode gridNode;
-                    if (textNode.equals(vacuum.characterSprite)) {
+                    if (textNode.equals(vacuum.getCharacterSprite())) {
                         gridNode = new GridNode(x, y, grid, vacuum);
-                    } else if (textNode.equals(steelBulkhead.characterSprite)) {
+                    } else if (textNode.equals(steelBulkhead.getCharacterSprite())) {
                         gridNode = new GridNode(x, y, grid, steelBulkhead);
-                    } else if (textNode.equals(steelBulkheadDoor.characterSprite)) {
+                    } else if (textNode.equals(steelBulkheadDoor.getCharacterSprite())) {
                         gridNode = new GridNode(x, y, grid, steelBulkheadDoor);
-                    } else if (textNode.equals(steelBulkheadFloor.characterSprite)) {
+                    } else if (textNode.equals(steelBulkheadFloor.getCharacterSprite())) {
                         gridNode = new GridNode(x, y, grid, steelBulkheadFloor);
                     } else {
                         gridNode = null;
@@ -67,7 +65,7 @@ public class GridLoader {
                 GridRow gridRow = grid.get(row);
                 for (int col = 0; col < grid.xSize(row); col++) {
                     GridNode gridNode = gridRow.get(col);
-                    string.append(gridNode.getMaterial().characterSprite);
+                    string.append(gridNode.getMaterial().getCharacterSprite());
                 }
                 string.append("\n");
             }
