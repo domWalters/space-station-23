@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.Boolean?>
+<?import org.spacestation23.view.materialEditor.MaterialEditorVisualisationCell?>
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.spacestation23.control.MaterialEditorController">
     <top>
         <MenuBar>
@@ -26,15 +27,13 @@
         <ListView fx:id="materialListView" onKeyPressed="#handleKeyPressOnMaterialListView"/>
     </center>
     <right>
-        <GridPane>
+        <GridPane fx:id="editingGridPane">
             <children>
                 <Label text="Material Properties" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
                 <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label text="String Sprite:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="stringSpriteTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label text="Passable:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <ChoiceBox fx:id="passableChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+                <Label text="Passable:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="passableChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" >
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <Boolean fx:value="true"/>
@@ -42,11 +41,11 @@
                         </FXCollections>
                     </items>
                 </ChoiceBox>
-                <Label text="Inventory Capacity:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <TextField fx:id="inventoryCapacityTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label text="Image Sprite:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                <Button fx:id="imageSpriteButton" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#handleImageSpriteButtonClicked"/>
-                <Button onAction="#handleSubmitButton" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+                <Label text="Inventory Capacity:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="inventoryCapacityTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Visualisations" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                <Button fx:id="addVisualisationButton" text="Add" GridPane.columnIndex="0" GridPane.rowIndex="5" onAction="#handleAddVisualisationButton" />
+                <Button fx:id="submitButton" text="Submit" GridPane.columnIndex="2" GridPane.rowIndex="5" onAction="#handleSubmitButton" />
             </children>
         </GridPane>
     </right>

@@ -40,20 +40,6 @@ public class ItemEditorController implements Initializable {
     }
 
     @FXML
-    void handleSubmitButton() {
-        String itemName = nameTextField.getText();
-        String itemId = idTextField.getText();
-        String itemStackCapacity = stackCapacityTextField.getText();
-        Item newItem = ItemCreator.createItemFromStrings(itemName, itemId, itemStackCapacity);
-        if (newItem != null) {
-            ItemCreator.items.put(newItem.getItemId(), newItem);
-            ItemCreationSucceededAlert goodAlert = new ItemCreationSucceededAlert(newItem.getItemId());
-            goodAlert.showAndWait();
-            itemsObservableList.add(newItem);
-        }
-    }
-
-    @FXML
     void handleOpenItemsXML() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
@@ -83,6 +69,20 @@ public class ItemEditorController implements Initializable {
     void handleKeyPressOnItemListView(KeyEvent e) {
         if (e.getCode().equals(KeyCode.DELETE) && itemListView.getFocusModel().getFocusedItem() != null) {
             this.handleDeleteItem();
+        }
+    }
+
+    @FXML
+    void handleSubmitButton() {
+        String itemName = nameTextField.getText();
+        String itemId = idTextField.getText();
+        String itemStackCapacity = stackCapacityTextField.getText();
+        Item newItem = ItemCreator.createItemFromStrings(itemName, itemId, itemStackCapacity);
+        if (newItem != null) {
+            ItemCreator.items.put(newItem.getItemId(), newItem);
+            ItemCreationSucceededAlert goodAlert = new ItemCreationSucceededAlert(newItem.getItemId());
+            goodAlert.showAndWait();
+            itemsObservableList.add(newItem);
         }
     }
 

@@ -1,45 +1,47 @@
 package org.spacestation23.model.material;
 
-import javafx.scene.image.Image;
+import javafx.util.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Material {
 
     public static final String INVALID_NAME = "";
-    public static final String INVALID_STRING_SPRITE = "";
+    public static final Boolean INVALID_PASSABILITY = null;
     public static final int INVALID_INVENTORY_CAPACITY = -1;
-    public static final String INVALID_IMAGE_SPRITE = "";
 
     private String name;
-    private String characterSprite;
-    private boolean passable;
+    private Boolean passable;
     private Integer inventoryCapacity;
-    private Image imgSprite;
+    private List<Visualisation> visualisations;
 
-    public Material(String name, String characterSprite, boolean passable, Integer inventoryCapacity, Image imgSprite) {
+    public Material(String name, boolean passable, Integer inventoryCapacity, List<Visualisation> visualisations) {
         this.name = name;
-        this.characterSprite = characterSprite;
         this.passable = passable;
         this.inventoryCapacity = inventoryCapacity;
-        this.imgSprite = imgSprite;
+        this.visualisations = visualisations;
     }
 
-    public Material(String materialName, String materialStringSprite, String materialPassable, String materialInventoryCapacity, String materialImageSprite) {
+    public Material(String materialName, String materialPassable, String materialInventoryCapacity, List<Pair<String, String>> materialVisualisationsList) {
         if (!materialName.equals(INVALID_NAME)) {
             this.setName(materialName);
-            if (!materialStringSprite.equals(INVALID_STRING_SPRITE)) {
-                this.setCharacterSprite(materialStringSprite);
+            if (materialPassable.equals("true") || materialPassable.equals("false")) {
                 this.setPassable(materialPassable.equals("true"));
                 try {
                     int materialInventoryCapacityNumber = Integer.parseInt(materialInventoryCapacity);
                     this.setInventoryCapacity(materialInventoryCapacityNumber);
-                    this.setImgSprite(new Image(materialImageSprite));
+                    List<Visualisation> materialVisualisationsObjectsList = new ArrayList<>();
+                    for (Pair<String, String> visualisation : materialVisualisationsList) {
+                        materialVisualisationsObjectsList.add(new Visualisation(visualisation.getKey(), visualisation.getValue()));
+                    }
+                    this.setVisualisations(materialVisualisationsObjectsList);
                 } catch (NumberFormatException f) {
                     this.setInventoryCapacity(INVALID_INVENTORY_CAPACITY);
                 }
             } else {
-                this.setCharacterSprite(INVALID_STRING_SPRITE);
+                this.setPassable(INVALID_PASSABILITY);
             }
         } else {
             this.setName(INVALID_NAME);
@@ -54,19 +56,11 @@ public class Material {
         this.name = name;
     }
 
-    public String getCharacterSprite() {
-        return characterSprite;
-    }
-
-    public void setCharacterSprite(String characterSprite) {
-        this.characterSprite = characterSprite;
-    }
-
-    public boolean isPassable() {
+    public Boolean isPassable() {
         return passable;
     }
 
-    public void setPassable(boolean passable) {
+    public void setPassable(Boolean passable) {
         this.passable = passable;
     }
 
@@ -78,22 +72,21 @@ public class Material {
         this.inventoryCapacity = inventoryCapacity;
     }
 
-    public Image getImgSprite() {
-        return imgSprite;
+    public List<Visualisation> getVisualisations() {
+        return visualisations;
     }
 
-    public void setImgSprite(Image imgSprite) {
-        this.imgSprite = imgSprite;
+    public void setVisualisations(List<Visualisation> visualisations) {
+        this.visualisations = visualisations;
     }
 
     @Override
     public String toString() {
         return "Material{" +
                 "name='" + name + '\'' +
-                ", characterSprite='" + characterSprite + '\'' +
                 ", passable=" + passable +
                 ", inventoryCapacity=" + inventoryCapacity +
-                ", imgSprite=" + imgSprite +
+                ", visualisations=" + visualisations +
                 '}';
     }
 
@@ -104,20 +97,17 @@ public class Material {
         Material material = (Material) o;
         return passable == material.passable &&
                 name.equals(material.name) &&
-                characterSprite.equals(material.characterSprite) &&
-                inventoryCapacity.equals(material.inventoryCapacity) &&
-                imgSprite.equals(material.imgSprite);
+                Objects.equals(inventoryCapacity, material.inventoryCapacity) &&
+                visualisations.equals(material.visualisations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, characterSprite, passable, inventoryCapacity, imgSprite);
+        return Objects.hash(name, passable, inventoryCapacity, visualisations);
     }
 
     public String toStringForAlert() {
-        return "Name: " + this.getName()
-                + "\nString Sprite: " + this.getCharacterSprite()
-                + "\nImage Sprite: " + this.getImgSprite().getUrl();
+        return "Name: " + this.getName();
     }
 
 }

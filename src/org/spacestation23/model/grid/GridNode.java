@@ -14,19 +14,24 @@ public class GridNode implements Serializable {
     private Integer x;
     private Integer y;
     private Grid grid;
-
     private Material material;      // Can be observed
+    private Integer rotation;
+    private Integer visualisationIndex;
+
     private Inventory inventory;
     private Pawn pawn;
 
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
-    public GridNode(Integer x, Integer y, Grid grid, Material material) {
+    public GridNode(Integer x, Integer y, Grid grid, Material material, Integer rotation, Integer visualisationIndex) {
         super();
         this.x = x;
         this.y = y;
         this.grid = grid;
         this.material = material;
+        this.rotation = rotation;
+        this.visualisationIndex = visualisationIndex;
+
         this.inventory = (material.isPassable()) ? new Inventory("Floor at (" + x + ", " + y + ")", material.getInventoryCapacity()) : null;
         this.pawn = null;
     }
@@ -60,9 +65,29 @@ public class GridNode implements Serializable {
     }
 
     public void setMaterial(Material material) {
-        Material oldMaterial = this.getMaterial();
+        Material oldMaterial = this.material;
         this.material = material;
         this.pcs.firePropertyChange("material", oldMaterial, this.material);
+    }
+
+    public Integer getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(Integer rotation) {
+        Integer oldRotation = this.rotation;
+        this.rotation = rotation;
+        this.pcs.firePropertyChange("rotation", oldRotation, this.rotation);
+    }
+
+    public Integer getVisualisationIndex() {
+        return visualisationIndex;
+    }
+
+    public void setVisualisationIndex(Integer visualisationIndex) {
+        Integer oldVisualisationIndex = this.visualisationIndex;
+        this.visualisationIndex = visualisationIndex;
+        this.pcs.firePropertyChange("visualisationIndex", oldVisualisationIndex, this.visualisationIndex);
     }
 
     public Inventory getInventory() {
@@ -100,15 +125,11 @@ public class GridNode implements Serializable {
         if (!(o instanceof GridNode)) return false;
         GridNode gridNode = (GridNode) o;
         return x.equals(gridNode.x) &&
-                y.equals(gridNode.y) &&
-                Objects.equals(grid, gridNode.grid) &&
-                material.equals(gridNode.material) &&
-                Objects.equals(inventory, gridNode.inventory) &&
-                Objects.equals(pawn, gridNode.pawn);
+                y.equals(gridNode.y);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y, grid, material, inventory, pawn);
+        return Objects.hash(x, y);
     }
 }

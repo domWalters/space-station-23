@@ -2,6 +2,7 @@ package org.spacestation23.model.grid;
 
 import org.spacestation23.model.material.Material;
 import org.spacestation23.model.material.MaterialCreator;
+import org.spacestation23.model.material.Visualisation;
 
 import java.io.*;
 
@@ -25,16 +26,38 @@ public class GridCreator {
             Integer y = -1;
             while(br.ready()) {
                 GridRow row = new GridRow();
-                String[] textRow = br.readLine().split("");
+                String[] textRow = br.readLine().split("\t");
                 Integer x = -1;
                 y++;
                 for (String textNode : textRow) {
                     x++;
+                    // 3 components: character, version, rotation (char NUMBER [URLD])
+                    String[] textSplit = textNode.split(" ");
+                    String textCharacterRep = textSplit[0];
+                    String textVersion = textSplit[1];
+                    String textRotation = textSplit[2];
+                    int rotation = 0;
+                    switch(textRotation) {
+                        case "U":
+                            rotation = 0;
+                            break;
+                        case "R":
+                            rotation = 90;
+                            break;
+                        case "D":
+                            rotation = 180;
+                            break;
+                        case "L":
+                            rotation = 270;
+                            break;
+                    }
                     GridNode gridNode = null;
                     for (Material material : MaterialCreator.materials.values()) {
-                        if (textNode.equals(material.getCharacterSprite())) {
-                            gridNode = new GridNode(x, y, grid, material);
-                            break;
+                        for (Visualisation visualisation : material.getVisualisations()) {
+                            if (textCharacterRep.equals(visualisation.getCharacterSprite())) {
+                                gridNode = new GridNode(x, y, grid, material, rotation, Integer.parseInt(textVersion));
+                                break;
+                            }
                         }
                     }
                     row.add(gridNode);
@@ -56,7 +79,30 @@ public class GridCreator {
                 GridRow gridRow = grid.get(row);
                 for (int col = 0; col < grid.xSize(row); col++) {
                     GridNode gridNode = gridRow.get(col);
-                    string.append(gridNode.getMaterial().getCharacterSprite());
+                    int visIndex = gridNode.getVisualisationIndex();
+                    string.append(gridNode.getMaterial().getVisualisations().get(visIndex).getCharacterSprite());
+                    string.append(" ");
+                    string.append(visIndex);
+                    string.append(" ");
+                    String rotation = "U";
+                    switch (gridNode.getRotation()) {
+                        case 0:
+                            rotation = "U";
+                            break;
+                        case 90:
+                            rotation = "R";
+                            break;
+                        case 180:
+                            rotation = "D";
+                            break;
+                        case 270:
+                            rotation = "L";
+                            break;
+                    }
+                    string.append(rotation);
+                    if (col != grid.xSize(row) - 1) {
+                        string.append("\t");
+                    }
                 }
                 string.append("\n");
             }

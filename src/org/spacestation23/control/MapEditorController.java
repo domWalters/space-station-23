@@ -45,7 +45,36 @@ public class MapEditorController implements Initializable, PropertyChangeListene
             grid = GridCreator.loadFromFile(file);
             mapEditorMap = new MapEditorMap(grid, this);
             mapEditorMap.addPropertyChangeListener(this);
-            borderPane.setCenter(mapEditorMap);
+            for (int row = 0; row < grid.ySize(); row++) {
+                for (int col = 0; col < grid.xSize(row); col++) {
+                    final int lambdaRow = row;
+                    final int lambdaCol = col;
+                    mapEditorMap.setOnKeyPressed(lambdaRow, lambdaCol, event -> {
+                        GridNode gridNode = grid.get(lambdaRow).get(lambdaCol);
+                        MapEditorMapCell mapEditorMapCell = mapEditorMap.getMapCellFromGridNode(gridNode);
+                        int rotation = gridNode.getRotation();
+                        switch(event.getCode()) {
+                            case Q:
+                                if (rotation == 0) {
+                                    gridNode.setRotation(270);
+                                } else {
+                                    gridNode.setRotation(rotation - 90);
+                                }
+                                mapEditorMapCell.getTileView().setRotate(gridNode.getRotation());
+                                break;
+                            case E:
+                                if (rotation == 270) {
+                                    gridNode.setRotation(0);
+                                } else {
+                                    gridNode.setRotation(rotation + 90);
+                                }
+                                mapEditorMapCell.getTileView().setRotate(gridNode.getRotation());
+                                break;
+                        }
+                    });
+                }
+            }
+            borderPane.setLeft(mapEditorMap);
             borderPane.getScene().getWindow().sizeToScene();
         }
     }
@@ -88,13 +117,15 @@ public class MapEditorController implements Initializable, PropertyChangeListene
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        System.out.println("PROPERTY CHANGE");
         if (evt.getPropertyName().equals("currentFocus") && materialComboBox != null) {
+            System.out.println("SELECTION CHANGED");
             MapEditorMapCell newSelection = (MapEditorMapCell) evt.getNewValue();
             GridNode newSelectionGridNode = mapEditorMap.getGridNodeFromMapCell(newSelection);
             materialComboBox.getSelectionModel().select(newSelectionGridNode.getMaterial());
         } else if (evt.getPropertyName().equals("material") && mapEditorMap != null) {
             GridNode location = (GridNode) evt.getSource();
-            mapEditorMap.getMapCellFromGridNode(location).setMaterial((Material) evt.getNewValue());
+            mapEditorMap.getMapCellFromGridNode(location).setMaterial(location, (Material) evt.getNewValue());
         }
     }
 }

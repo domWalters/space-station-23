@@ -47,7 +47,8 @@ public class MapEditorMapCell extends StackPane {
             throw new RuntimeException(exception);
         }
         // Set Images
-        tileView.setImage(cell.getMaterial().getImgSprite());
+        tileView.setImage(cell.getMaterial().getVisualisations().get(cell.getVisualisationIndex()).getImageSprite());
+        tileView.setRotate(cell.getRotation());
         Pawn pawn = cell.getPawn();
         if (pawn != null) {
             pawnView.setImage(pawn.getSprite());
@@ -74,8 +75,9 @@ public class MapEditorMapCell extends StackPane {
         this.getChildren().remove(pawnView);
     }
 
-    public void setMaterial(Material material) {
-        this.tileView.setImage(material.getImgSprite());
+    public void setMaterial(GridNode gridNode, Material material) {
+        int visIndex = (gridNode == null) ? 0 : gridNode.getVisualisationIndex();
+        this.tileView.setImage(material.getVisualisations().get(visIndex).getImageSprite());
     }
 
     private void setFocusListener() {
@@ -90,6 +92,9 @@ public class MapEditorMapCell extends StackPane {
         });
     }
 
+    public ImageView getTileView() {
+        return tileView;
+    }
 }
 
 

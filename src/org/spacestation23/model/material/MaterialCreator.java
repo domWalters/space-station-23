@@ -1,6 +1,6 @@
 package org.spacestation23.model.material;
 
-import javafx.scene.image.Image;
+import javafx.util.Pair;
 import org.spacestation23.view.materialEditor.alert.MaterialCreationFailedAlert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,7 +19,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MaterialCreator {
 
@@ -40,11 +42,20 @@ public class MaterialCreator {
                 if (ithMaterialNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element ithMaterialElement = (Element) ithMaterialNode;
                     String materialName = ithMaterialElement.getAttribute("name");
-                    String materialCharacterSprite = ithMaterialElement.getElementsByTagName("characterSprite").item(0).getTextContent();
                     String materialPassable = ithMaterialElement.getElementsByTagName("passable").item(0).getTextContent();
                     String materialInventoryCapacity = ithMaterialElement.getElementsByTagName("inventoryCapacity").item(0).getTextContent();
-                    String materialImageSprite = ithMaterialElement.getElementsByTagName("imageSprite").item(0).getTextContent();
-                    materials.put(materialName, new Material(materialName, materialCharacterSprite, materialPassable.equals("true"), Integer.parseInt(materialInventoryCapacity), new Image(materialImageSprite)));
+                    NodeList materialVisualisations = ithMaterialElement.getElementsByTagName("visualisation");
+                    List<Pair<String, String>> materialVisualisationsList = new ArrayList<>();
+                    for (int j = 0; j < materialVisualisations.getLength(); j++) {
+                        Node jthVisualisationNode = materialVisualisations.item(j);
+                        if (jthVisualisationNode.getNodeType() == Node.ELEMENT_NODE) {
+                            Element jthVisualisationElement = (Element) jthVisualisationNode;
+                            String materialCharacterSprite = jthVisualisationElement.getElementsByTagName("characterSprite").item(0).getTextContent();
+                            String materialImageSprite = jthVisualisationElement.getElementsByTagName("imageSprite").item(0).getTextContent();
+                            materialVisualisationsList.add(new Pair<>(materialCharacterSprite, materialImageSprite));
+                        }
+                    }
+                    materials.put(materialName, new Material(materialName, materialPassable, materialInventoryCapacity, materialVisualisationsList));
                 }
             }
         } catch (IOException | ParserConfigurationException | SAXException e) {
@@ -66,10 +77,6 @@ public class MaterialCreator {
                 Element materialElement = doc.createElement("material");
                 rootElement.appendChild(materialElement);
                 materialElement.setAttribute("name", material.getName());
-                // characterSprite
-                Element characterSpriteElement = doc.createElement("characterSprite");
-                characterSpriteElement.appendChild(doc.createTextNode(material.getCharacterSprite()));
-                materialElement.appendChild(characterSpriteElement);
                 // passable
                 Element passableElement = doc.createElement("passable");
                 passableElement.appendChild(doc.createTextNode("" + material.isPassable()));
@@ -78,10 +85,19 @@ public class MaterialCreator {
                 Element inventoryCapacityElement = doc.createElement("inventoryCapacity");
                 inventoryCapacityElement.appendChild(doc.createTextNode("" + material.getInventoryCapacity()));
                 materialElement.appendChild(inventoryCapacityElement);
-                // imageSprite
-                Element imageSpriteElement = doc.createElement("imageSprite");
-                imageSpriteElement.appendChild(doc.createTextNode(material.getImgSprite().getUrl()));
-                materialElement.appendChild(imageSpriteElement);
+                // visualisations
+                for(Visualisation visualisation : material.getVisualisations()) {
+                    Element visualisationsElement = doc.createElement("visualisation");
+                    // characterSprite
+                    Element characterSpriteElement = doc.createElement("characterSprite");
+                    characterSpriteElement.appendChild(doc.createTextNode(visualisation.getCharacterSprite()));
+                    visualisationsElement.appendChild(characterSpriteElement);
+                    // imageSprite
+                    Element imageSpriteElement = doc.createElement("imageSprite");
+                    imageSpriteElement.appendChild(doc.createTextNode(visualisation.getImageSprite().getUrl()));
+                    visualisationsElement.appendChild(imageSpriteElement);
+                    materialElement.appendChild(visualisationsElement);
+                }
             }
             // Create file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -95,22 +111,26 @@ public class MaterialCreator {
         }
     }
 
-    public static Material createMaterialFromStrings(String materialName, String materialStringSprite, String materialPassable, String materialInventoryCapacity, String materialImageSprite) {
+    public static Material createMaterialFromStrings(String materialName, String materialPassable, String materialInventoryCapacity, List<Pair<String, String>> materialVisualisationsList) {
         MaterialCreationFailedAlert alert = new MaterialCreationFailedAlert();
-        Material newMaterial = new Material(materialName, materialStringSprite, materialPassable, materialInventoryCapacity,materialImageSprite);
+        Material newMaterial = new Material(materialName, materialPassable, materialInventoryCapacity, materialVisualisationsList);
         if (!newMaterial.getName().equals(Material.INVALID_NAME)) {
-            if (!newMaterial.getCharacterSprite().equals(Material.INVALID_STRING_SPRITE)) {
+            if (newMaterial.isPassable() != Material.INVALID_PASSABILITY) {
                 if (!newMaterial.getInventoryCapacity().equals(Material.INVALID_INVENTORY_CAPACITY)) {
-                    if (!newMaterial.getImgSprite().getUrl().equals(Material.INVALID_IMAGE_SPRITE)) {
-                        return newMaterial;
-                    } else {
-                        alert.updateContentText("Image Sprite didn't resolve correctly.");
+                    for (Visualisation visualisation : newMaterial.getVisualisations()) {
+                        if (!visualisation.getCharacterSprite().equals(Visualisation.INVALID_STRING_SPRITE)) {
+                            if (!visualisation.getImageSprite().getUrl().equals(Visualisation.INVALID_STRING_SPRITE)) {
+                                return newMaterial;
+                            } else {
+                                alert.updateContentText("Image Sprite didn't resolve correctly.");
+                            }
+                        } else {
+                            alert.updateContentText("String Sprite was the empty string.");
+                        }
                     }
                 } else {
                     alert.updateContentText("Inventory Capacity was negative.");
                 }
-            } else {
-                alert.updateContentText("String Sprite was the empty string.");
             }
         } else {
             alert.updateContentText("Material Name was the empty string.");

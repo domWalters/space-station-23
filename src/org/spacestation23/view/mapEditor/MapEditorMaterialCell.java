@@ -39,7 +39,7 @@ public class MapEditorMaterialCell extends ListCell<Material> {
                 }
             }
 
-            itemGraphic.setMaterial(material);
+            itemGraphic.setMaterial(null, material);
             itemLabel.setText(material.getName());
 
             setText(null);

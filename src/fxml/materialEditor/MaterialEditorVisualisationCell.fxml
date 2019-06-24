@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <TextField fx:id="characterSpriteTextField" />
+        <Separator orientation="VERTICAL" />
+        <Button fx:id="imageSpriteButton" onAction="#handleImageSpriteButtonClicked"/>
+        <Button fx:id="deleteButton" text="Delete" />
+    </children>
+</fx:root>
